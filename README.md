@@ -135,6 +135,20 @@ uvicorn app.main:app --reload
 - ReDoc: http://localhost:8000/redoc
 - Health check: http://localhost:8000/health
 
+### Run with Docker (API + MySQL)
+
+You don't need Python or MySQL installed; Docker runs both. Fill in the "Docker" section of `.env`, then:
+
+```bash
+docker compose up -d --build
+```
+
+- The API listens on `http://<host>:${API_PORT}` (default 80). MySQL isn't published to the host.
+- Migrations run automatically every time the container starts. Data lives in the `mysql_data` volume.
+- To load test users, run `docker compose exec api python -m app.seed.dummy_data`.
+- For logs, run `docker compose logs -f api`.
+- To update after a `git pull`, run `docker compose up -d --build` again.
+
 ## 6. Tests
 
 ```bash
