@@ -35,6 +35,24 @@ class Settings(BaseSettings):
     OTP_SEND_WINDOW_SECONDS: int = 3600
 
     CREDIT_PROVIDER: str = "dummy"
+    AGGREGATOR_PROVIDER: str = "mock"  # third-party bank/investment data (mock = sample reports)
+
+    # Everything is shown to the customer in this currency; other currencies are converted with
+    # these rates (rupees per 1 unit). Approximate defaults - update them, or plug in live rates.
+    REPORTING_CURRENCY: str = "INR"
+    FX_RATES_INR: str = "EUR:100,USD:88,GBP:115,AED:24,SGD:66"
+
+    # AI advisor. "offline" = rule-based insights (no API key, free, deterministic);
+    # "claude" = Claude via the Anthropic API.
+    LLM_PROVIDER: str = "offline"
+    ANTHROPIC_API_KEY: str | None = None
+    LLM_MODEL: str = "claude-opus-5-5"
+    LLM_AGENT_EFFORT: str = "low"
+    LLM_CHIEF_EFFORT: str = "medium"
+    LLM_CHAT_EFFORT: str = "low"
+    LLM_MAX_PARALLEL: int = 4
+    # Run analyses inside the request instead of a background task (tests, debugging).
+    ADVISOR_INLINE: bool = False
 
     CORS_ORIGINS: str = "*"
 
@@ -48,6 +66,11 @@ class Settings(BaseSettings):
     @property
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.CORS_ORIGINS.split(",") if o.strip()]
+
+    @property
+    def dev_endpoints_enabled(self) -> bool:
+        """Endpoints that accept test data (e.g. pushing a raw aggregator report)."""
+        return not self.is_production
 
     @property
     def is_production(self) -> bool:

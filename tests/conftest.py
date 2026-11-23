@@ -12,6 +12,8 @@ os.environ["ENVIRONMENT"] = "test"
 os.environ["OTP_RESEND_COOLDOWN_SECONDS"] = "0"
 os.environ["API_CLIENT_ID"] = "test-mobile-app"
 os.environ["API_CLIENT_SECRET"] = "test-client-secret-0123456789"
+os.environ["LLM_PROVIDER"] = "offline"
+os.environ["ADVISOR_INLINE"] = "true"  # run analyses inside the request so tests see the result
 
 import pytest  # noqa: E402
 from httpx import ASGITransport, AsyncClient  # noqa: E402

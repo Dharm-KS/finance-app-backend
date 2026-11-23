@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finance Twin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">◆</span> Finance Twin</div>
+    <div class="topbar-right">
+      <span id="run-pill" class="pill hidden"></span>
+      <span id="user-label" class="muted"></span>
+      <button id="logout-btn" class="btn ghost small hidden">Log out</button>
+    </div>
+  </header>
+
+  <!-- ===== Sign in ===== -->
+  <main id="login-view" class="view narrow hidden">
+    <section class="card">
+      <h1>Sign in</h1>
+      <p class="muted">Mobile number and OTP. Test OTP: <b>123456</b>.</p>
+      <label>Mobile number<input id="mobile" inputmode="tel" placeholder="9876543210" autocomplete="tel"></label>
+      <div id="otp-row" class="hidden">
+        <label>OTP<input id="otp" inputmode="numeric" maxlength="8" placeholder="123456" autocomplete="one-time-code"></label>
+        <label id="name-row" class="hidden">Your name<input id="name" placeholder="Full name"></label>
+      </div>
+      <div class="row">
+        <button id="send-otp-btn" class="btn primary">Send OTP</button>
+        <button id="verify-otp-btn" class="btn primary hidden">Verify</button>
+      </div>
+      <details class="settings">
+        <summary>API client settings</summary>
+        <p class="muted small">The app's client credentials (<code>API_CLIENT_ID</code> / <code>API_CLIENT_SECRET</code> from the server's .env). Saved in this browser only.</p>
+        <label>Client ID<input id="client-id" value="finance-mobile-app"></label>
+        <label>Client secret<input id="client-secret" type="password" autocomplete="off"></label>
+      </details>
+      <p id="login-msg" class="msg"></p>
+    </section>
+  </main>
+
+  <!-- ===== App ===== -->
+  <main id="app-view" class="view hidden">
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="plan">Plan</button>
+      <button class="tab" data-tab="agents">Agents</button>
+      <button class="tab" data-tab="chat">Chat</button>
+      <button class="tab" data-tab="data">Data</button>
+    </nav>
+
+    <!-- Plan -->
+    <section id="tab-plan" class="tab-panel">
+      <div id="connect-empty" class="card empty hidden">
+        <h2>Connect your accounts</h2>
+        <p class="muted">Your twin reads your bank accounts, investments, loans and property, then 8 specialist agents and the Chief agent build your plan.</p>
+        <button class="btn primary connect-btn">Connect bank accounts</button>
+      </div>
+
+      <div id="progress-card" class="card hidden">
+        <h2>Analysing your finances…</h2>
+        <p class="muted">Each specialist agent reviews its area, then the Chief agent combines them into one plan.</p>
+        <div id="progress-agents" class="chips"></div>
+      </div>
+
+      <div id="plan-content" class="hidden">
+        <div class="card hero">
+          <div class="hero-top">
+            <span id="health-badge" class="badge"></span>
+            <span id="plan-meta" class="muted small"></span>
+          </div>
+          <h1 id="headline"></h1>
+          <p id="summary"></p>
+          <div id="balance-tiles" class="tiles"></div>
+          <div class="row">
+            <button id="refresh-btn" class="btn ghost small">Re-run analysis</button>
+            <span id="stale-note" class="muted small hidden">Your data changed since the last analysis.</span>
+          </div>
+        </div>
+
+        <div id="conflicts" class="hidden">
+          <h2 class="section-title">Trade-offs your twin resolved</h2>
+          <div id="conflict-list" class="stack"></div>
+        </div>
+
+        <h2 class="section-title">Your plan, step by step</h2>
+        <ol id="steps" class="steps"></ol>
+
+        <details id="completed-wrap" class="hidden">
+          <summary class="section-title">Done &amp; dismissed (<span id="completed-count">0</span>)</summary>
+          <ol id="completed" class="steps compact"></ol>
+        </details>
+      </div>
+    </section>
+
+    <!-- Agents -->
+    <section id="tab-agents" class="tab-panel hidden">
+      <div id="agent-grid" class="grid"></div>
+    </section>
+
+    <!-- Chat -->
+    <section id="tab-chat" class="tab-panel hidden">
+      <div class="card chat">
+        <div id="chat-log" class="chat-log"></div>
+        <div id="chat-suggestions" class="chips"></div>
+        <form id="chat-form" class="chat-form">
+          <input id="chat-input" placeholder="Ask about your money…" autocomplete="off" maxlength="2000">
+          <button class="btn primary" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Data -->
+    <section id="tab-data" class="tab-panel hidden">
+      <div class="card">
+        <div class="row space">
+          <h2>Connected accounts</h2>
+          <button class="btn primary small connect-btn">Connect</button>
+        </div>
+        <div id="connections"></div>
+        <div id="data-counts" class="chips"></div>
+      </div>
+      <div id="data-tables"></div>
+      <div class="card">
+        <h2>Add details from other forms</h2>
+        <p class="muted small">Things the bank data can't show. Saving re-runs only the agents these details affect.</p>
+        <div class="extra-grid">
+          <label class="check"><input type="checkbox" id="x-will"> I have a will</label>
+          <label class="check"><input type="checkbox" id="x-benef"> Pension beneficiaries are named</label>
+          <label class="check"><input type="checkbox" id="x-poa"> I have a power of attorney</label>
+        </div>
+        <button id="extra-save" class="btn ghost small">Save estate details</button>
+        <span id="extra-msg" class="muted small"></span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Agent detail drawer -->
+  <aside id="drawer" class="drawer hidden" aria-hidden="true">
+    <div class="drawer-panel">
+      <button id="drawer-close" class="btn ghost small close">Close</button>
+      <div id="drawer-body"></div>
+    </div>
+  </aside>
+
+  <!-- Connect modal -->
+  <div id="connect-modal" class="modal hidden">
+    <div class="card modal-card">
+      <h2>Connect bank accounts</h2>
+      <p class="muted">Your bank sent an OTP to your mobile. Test OTP: <b>123456</b>.</p>
+      <label>OTP<input id="agg-otp" inputmode="numeric" maxlength="8" placeholder="123456"></label>
+      <div class="row">
+        <button id="agg-verify" class="btn primary">Verify &amp; import</button>
+        <button id="agg-cancel" class="btn ghost">Cancel</button>
+      </div>
+      <p id="agg-msg" class="msg"></p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>

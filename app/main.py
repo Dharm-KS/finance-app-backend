@@ -1,7 +1,10 @@
 import logging
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.router import api_router
 from app.core.config import settings
@@ -41,6 +44,13 @@ def create_app() -> FastAPI:
     @app.get("/health", tags=["Health"], summary="Liveness check")
     async def health():
         return {"success": True, "data": {"status": "ok"}, "message": "OK"}
+
+    # Web app for testing the flow; it only calls the public /api/v1 APIs (same ones as the mobile app).
+    app.mount("/app", StaticFiles(directory=Path(__file__).parent / "static" / "app", html=True), name="web-app")
+
+    @app.get("/", include_in_schema=False)
+    async def root():
+        return RedirectResponse("/app/")
 
     return app
 

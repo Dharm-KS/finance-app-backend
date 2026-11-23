@@ -96,6 +96,14 @@ GRANT ALL PRIVILEGES ON finance_app.* TO 'finance_user'@'localhost';
 | `OTP_MAX_SENDS_PER_WINDOW` | `5` | Max OTPs per mobile in the window (`OTP_LIMIT_REACHED`) |
 | `OTP_SEND_WINDOW_SECONDS` | `3600` | |
 | `CREDIT_PROVIDER` | `dummy` | Later: `cibil` |
+| `AGGREGATOR_PROVIDER` | `mock` | Bank / investment data provider (mock = the two sample reports) |
+| `REPORTING_CURRENCY` | `INR` | Every amount shown to the customer is in this currency |
+| `FX_RATES_INR` | `EUR:100,USD:88,...` | Rupees per 1 unit of each currency, used to convert provider data. Approximate defaults; keep them updated. |
+| `LLM_PROVIDER` | `offline` | `offline` = rule engine (no key); `claude` = Claude via the Anthropic API |
+| `ANTHROPIC_API_KEY` | | Required when `LLM_PROVIDER=claude` |
+| `LLM_MODEL` | `claude-opus-5-5` | Model for agents, Chief and chat |
+| `LLM_AGENT_EFFORT` / `LLM_CHIEF_EFFORT` / `LLM_CHAT_EFFORT` | `low` / `medium` / `low` | Claude effort per role |
+| `ADVISOR_INLINE` | `false` | Run analyses inside the request instead of the background (tests) |
 | `CORS_ORIGINS` | `*` | Comma separated |
 | `ENVIRONMENT`, `DEBUG`, `APP_NAME` | | |
 
@@ -149,13 +157,28 @@ docker compose up -d --build
 - For logs, run `docker compose logs -f api`.
 - To update after a `git pull`, run `docker compose up -d --build` again.
 
+## 5b. AI advisor and web UI
+
+- **Bank data:** `POST /api/v1/aggregator/connections` sends an OTP, and `.../verify-otp` imports the provider's reports. Each report section is stored in its own `agg_*` table; the raw response is kept in `agg_reports`.
+- **Agents:** 8 specialist agents (Investment, Tax, Insurance, Loan, Budget, RSU, Estate, Goal) and a Chief agent analyse the merged customer profile.
+  - Their state is saved per customer in `agent_states`. A new report or form only regenerates the agents whose inputs changed.
+  - Recommendations live in `advisor_recommendations`; a customer's done or dismissed status survives regeneration.
+- **Code lives in** `app/services/advisor/`:
+  - `profile.py`: the merged profile, without personal identifiers.
+  - `agents.py`: facts computed in code, plus the rule-based insights.
+  - `chief.py`: merging, conflicts and priorities.
+  - `llm.py`: the offline and Claude providers.
+  - `engine.py`: runs, persistence and chat.
+- **Web UI** at `http://<host>/app/`: sign in, connect accounts, follow the plan step by step, open each agent, and chat. It calls only the public `/api/v1` APIs, so the mobile app can make the same calls. Enter the client secret under "API client settings" on the sign-in screen.
+- **Turn on Claude:** set `LLM_PROVIDER=claude` and `ANTHROPIC_API_KEY`, then call `POST /api/v1/advisor/refresh` with `{"force": true}`.
+
 ## 6. Tests
 
 ```bash
 pytest -q
 ```
 
-The 95 tests run against an in-memory SQLite database, so you don't need MySQL. They cover:
+The 110 tests run against an in-memory SQLite database, so you don't need MySQL. They cover:
 - registration, login, invalid, expired and locked OTPs, and the OTP being single-use
 - `/me`, logout and token revocation
 - consent and its audit trail

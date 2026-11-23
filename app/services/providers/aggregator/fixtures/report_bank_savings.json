@@ -1,0 +1,3004 @@
+{
+  "success": true,
+  "payload": {
+    "user_information": {
+      "ID": "05249217L",
+      "job": "INGENIERO INDUSTRIAL",
+      "city": "MADRID",
+      "name": "ANTONIO MACHINE",
+      "email": "antonio.machine@example.com",
+      "gender": "male",
+      "address": "CALLE DE LA MAQUINA 1 3B",
+      "country": "ES",
+      "birth_date": "1980-05-12",
+      "cell_phone": "+34600123456",
+      "birth_place": "MADRID",
+      "postal_code": "28001",
+      "marital_status": "married"
+    },
+    "accounts": [
+      {
+        "uuid": "bb651f07cc71b85aa9e99581573819bb02470abe",
+        "subtype": "savings",
+        "code": "ES6399991978106912243452",
+        "name": "CUENTA AHORRO",
+        "currency": "EUR",
+        "owners": [
+          {
+            "ID": "05249217L",
+            "name": "ANTONIO MACHINE",
+            "role": "owner"
+          }
+        ],
+        "balances": {
+          "available": 25115.64,
+          "current": 25115.64
+        },
+        "interest_rate": 1.25,
+        "transactions": [
+          {
+            "uuid": "b256e4bd2b2fe2283ae46422f5b0ad6a80696868",
+            "value_date": "2026-08-26",
+            "operation_date": "2026-08-26",
+            "amount": 376.06,
+            "balance": 24434.28,
+            "description": "TRASPASO DESDE CUENTA CORRIENTE",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": [],
+            "transfer_details": {
+              "concept": "TRASPASO DESDE CUENTA CORRIENTE",
+              "sender_receiver": "ANTONIO MACHINE",
+              "account_number": null
+            }
+          },
+          {
+            "uuid": "34fbe2c46e46761ad57f8288473cac8017b97895",
+            "value_date": "2026-09-26",
+            "operation_date": "2026-09-26",
+            "amount": 373.4,
+            "balance": 24807.68,
+            "description": "ABONO TRASPASO ES**9421",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": [],
+            "transfer_details": {
+              "concept": "ABONO TRASPASO ES**9421",
+              "sender_receiver": "ANTONIO MACHINE",
+              "account_number": null
+            }
+          },
+          {
+            "uuid": "252f1153fa4b8d60e02be57f7232ab4f9742831a",
+            "value_date": "2026-09-30",
+            "operation_date": "2026-09-30",
+            "amount": 13.92,
+            "balance": 24821.6,
+            "description": "ABONO INTERESES CUENTA",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "f3b530a306e2fab752e1550525749d89b08f697f",
+            "value_date": "2026-10-26",
+            "operation_date": "2026-10-26",
+            "amount": 294.04,
+            "balance": 25115.64,
+            "description": "TRASPASO DESDE CUENTA CORRIENTE",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": [],
+            "transfer_details": {
+              "concept": "TRASPASO DESDE CUENTA CORRIENTE",
+              "sender_receiver": "ANTONIO MACHINE",
+              "account_number": null
+            }
+          }
+        ]
+      }
+    ],
+    "portfolios": [
+      {
+        "subtype": "funds",
+        "uuid": "cea72bb519b80d39b95355c99c2f8a29a9965a14",
+        "code": "CTR-219E93E7F1",
+        "name": "CARTERA FONDOS",
+        "currency": "EUR",
+        "total_value": 34018.57,
+        "weighted_return": 43.41,
+        "annualized_volatility": null,
+        "yield": 14267.23,
+        "contributions": 32867.12,
+        "withholdings": null,
+        "contracting_date": "2015-03-10",
+        "linked_account": "ES9899996423311680080297",
+        "owners": [
+          {
+            "ID": "05249217L",
+            "name": "ANTONIO MACHINE",
+            "role": "owner"
+          }
+        ],
+        "composition": [
+          {
+            "ISIN": "ES0152769032",
+            "ISIN_description": "Fondo S&P",
+            "currency": "EUR",
+            "weighting": 55.55,
+            "shares": 420.6698,
+            "price": 44.918508,
+            "total_amount": 18895.86
+          },
+          {
+            "ISIN": "ES0152772036",
+            "ISIN_description": "Fondo Renta Fija",
+            "currency": "EUR",
+            "weighting": 44.45,
+            "shares": 583.6626,
+            "price": 25.910018,
+            "total_amount": 15122.71
+          }
+        ],
+        "transactions": [
+          {
+            "uuid": "de0ce2119c67cc25cf888b843d98cc0a340d3870",
+            "operation_pending": false,
+            "operation_date": "2026-09-24",
+            "value_date": "2026-09-24",
+            "operation_type": "subscription by transfer",
+            "shares": 8.0361,
+            "price": 45.21299,
+            "total_amount": 363.34,
+            "currency": "EUR",
+            "ISIN": "ES0152769032"
+          },
+          {
+            "uuid": "b71b880a3c46cd577b7a5d6a1a63fdaebaa449ce",
+            "operation_pending": false,
+            "operation_date": "2026-09-24",
+            "value_date": "2026-09-24",
+            "operation_type": "redemption by transfer",
+            "shares": 105.1674,
+            "price": 45.21299,
+            "total_amount": 4754.93,
+            "currency": "EUR",
+            "ISIN": "ES0152769032"
+          }
+        ]
+      },
+      {
+        "subtype": "pension-plans",
+        "uuid": "8eaa3d9e5fd92db1e67ad4dd86ac65e5c8f4a547",
+        "code": "CTR-0545AA558A",
+        "name": "PLAN DE PENSIONES",
+        "currency": "EUR",
+        "total_value": 53951.45,
+        "weighted_return": 37.07,
+        "annualized_volatility": null,
+        "yield": 14591.08,
+        "contributions": 39360.37,
+        "withholdings": null,
+        "contracting_date": "2010-02-01",
+        "linked_account": "ES9899996423311680080297",
+        "owners": [
+          {
+            "ID": "05249217L",
+            "name": "ANTONIO MACHINE",
+            "role": "owner"
+          }
+        ],
+        "composition": [
+          {
+            "DGS": "N9990",
+            "DGS_description": "WR PLAN PENSIONES CRECIMIENTO",
+            "currency": "EUR",
+            "weighting": 100,
+            "shares": 3617.1359,
+            "price": 14.915517,
+            "total_amount": 53951.45
+          }
+        ],
+        "transactions": [
+          {
+            "uuid": "2c73200fee319cb3491dc96f66d5c2aa5c13cc17",
+            "operation_pending": false,
+            "operation_date": "2026-08-08",
+            "value_date": "2026-08-08",
+            "operation_type": "subscription by transfer",
+            "shares": 15.2521,
+            "price": 14.986114,
+            "total_amount": 228.57,
+            "currency": "EUR",
+            "DGS": "N9990"
+          },
+          {
+            "uuid": "0f2a081297b9a2d00e9ac44cdb7efecd590c5397",
+            "operation_pending": false,
+            "operation_date": "2026-09-18",
+            "value_date": "2026-09-18",
+            "operation_type": "subscription by transfer",
+            "shares": 15.4329,
+            "price": 14.810511,
+            "total_amount": 228.57,
+            "currency": "EUR",
+            "DGS": "N9990"
+          },
+          {
+            "uuid": "87aae34eb31400f14a4490c4b1a09d4241359026",
+            "operation_pending": false,
+            "operation_date": "2026-10-05",
+            "value_date": "2026-10-05",
+            "operation_type": "subscription by transfer",
+            "shares": 15.7031,
+            "price": 14.555708,
+            "total_amount": 228.57,
+            "currency": "EUR",
+            "DGS": "N9990"
+          }
+        ]
+      },
+      {
+        "subtype": "crypto",
+        "uuid": "0df373e373f29683a09c30f315d7fdb7e7ee8609",
+        "code": "CTR-B70D2521F5",
+        "name": "CARTERA CRIPTO",
+        "currency": "EUR",
+        "total_value": 10946.47,
+        "weighted_return": -13.23,
+        "annualized_volatility": null,
+        "yield": -1668.78,
+        "contributions": 12615.25,
+        "withholdings": null,
+        "contracting_date": "2021-06-15",
+        "linked_account": "ES9899996423311680080297",
+        "owners": [
+          {
+            "ID": "05249217L",
+            "name": "ANTONIO MACHINE",
+            "role": "owner"
+          }
+        ],
+        "composition": [
+          {
+            "ticker": "ETH",
+            "value_time": "2026-10-26 00:00:00",
+            "description": "ETHEREUM",
+            "currency": "EUR",
+            "weighting": 46.89,
+            "shares": 7932.6232,
+            "price": 0.647028,
+            "total_amount": 5132.63
+          },
+          {
+            "ticker": "BTC",
+            "value_time": "2026-10-26 00:00:00",
+            "description": "BITCOIN",
+            "currency": "EUR",
+            "weighting": 53.11,
+            "shares": 87.0025,
+            "price": 66.823801,
+            "total_amount": 5813.84
+          }
+        ],
+        "transactions": [
+          {
+            "uuid": "eb7fd9ab2f963d8a73ff4e8770c504793433f72b",
+            "operation_pending": false,
+            "operation_date": "2026-08-12",
+            "value_date": "2026-08-12",
+            "operation_type": "purchase",
+            "shares": 2.8121,
+            "price": 59.87593,
+            "total_amount": 168.38,
+            "currency": "EUR",
+            "ticker": "BTC"
+          },
+          {
+            "uuid": "b57e56f3155150c9f8306c4e5b9f5a473318154b",
+            "operation_pending": false,
+            "operation_date": "2026-09-08",
+            "value_date": "2026-09-08",
+            "operation_type": "purchase",
+            "shares": 5.0529,
+            "price": 65.715682,
+            "total_amount": 332.05,
+            "currency": "EUR",
+            "ticker": "BTC"
+          },
+          {
+            "uuid": "8f9353687373e4666a7163bbaabc0f9f583c281a",
+            "operation_pending": false,
+            "operation_date": "2026-10-24",
+            "value_date": "2026-10-24",
+            "operation_type": "purchase",
+            "shares": 181.5747,
+            "price": 0.657351,
+            "total_amount": 119.36,
+            "currency": "EUR",
+            "ticker": "ETH"
+          }
+        ]
+      },
+      {
+        "subtype": "stocks",
+        "uuid": "27c2aa95953125eac9b86769fec38d952a65baaa",
+        "code": "CTR-648771BAE4",
+        "name": "CARTERA VALORES",
+        "currency": "EUR",
+        "total_value": 66717.57,
+        "weighted_return": 29.35,
+        "annualized_volatility": null,
+        "yield": 20462.93,
+        "contributions": 69722.13,
+        "withholdings": null,
+        "contracting_date": "2018-05-20",
+        "linked_account": "ES9899996423311680080297",
+        "owners": [
+          {
+            "ID": "05249217L",
+            "name": "ANTONIO MACHINE",
+            "role": "owner"
+          }
+        ],
+        "composition": [
+          {
+            "ISIN": "US0900000084",
+            "ISIN_description": "MACHINE TECH INC",
+            "MIC": "XNAS",
+            "currency": "USD",
+            "weighting": 73.69,
+            "shares": 305,
+            "price": 161.198478,
+            "total_amount": 49165.54,
+            "reference_currency": "EUR",
+            "exchange_rate": 1
+          },
+          {
+            "ISIN": "ES0152743003",
+            "ISIN_description": "Fondo Dinámico",
+            "MIC": "XMAD",
+            "currency": "EUR",
+            "weighting": 2.49,
+            "shares": 148,
+            "price": 11.221102,
+            "total_amount": 1660.72
+          },
+          {
+            "ISIN": "ES0152739001",
+            "ISIN_description": "Fondo Moderado",
+            "MIC": "XMAD",
+            "currency": "EUR",
+            "weighting": 2.97,
+            "shares": 60,
+            "price": 33.038691,
+            "total_amount": 1982.32
+          },
+          {
+            "ISIN": "ES0116418007",
+            "ISIN_description": "Fondo Cartera NARANJA",
+            "MIC": "XMAD",
+            "currency": "EUR",
+            "weighting": 20.85,
+            "shares": 193,
+            "price": 72.067283,
+            "total_amount": 13908.99
+          }
+        ],
+        "transactions": [
+          {
+            "uuid": "7e7a6a728d32cbe2337e4c410c7646f56f0450df",
+            "operation_pending": false,
+            "operation_date": "2026-08-20",
+            "value_date": "2026-08-20",
+            "operation_type": "scrip dividend",
+            "shares": 1,
+            "price": 0,
+            "total_amount": 0,
+            "currency": "EUR",
+            "ISIN": "ES0152739001"
+          },
+          {
+            "uuid": "d1dc197a296d0531dc4435600e65739de49ecfc8",
+            "operation_pending": false,
+            "operation_date": "2026-09-18",
+            "value_date": "2026-09-18",
+            "operation_type": "purchase",
+            "shares": 18,
+            "price": 66.241786,
+            "total_amount": 1192.35,
+            "currency": "EUR",
+            "ISIN": "ES0116418007"
+          }
+        ]
+      }
+    ],
+    "cards": [
+      {
+        "status": "active",
+        "subtype": "debit",
+        "uuid": "3bfd2538b18923ae213836afbd8154b8653597e8",
+        "code": "454852******1167",
+        "name": "TARJETA DEBITO",
+        "currency": "EUR",
+        "balances": {
+          "available": null,
+          "limit": null,
+          "disposed": 403.31
+        },
+        "linked_account": "ES9899996423311680080297",
+        "owner": [
+          {
+            "ID": "05249217L",
+            "name": "ANTONIO MACHINE",
+            "role": "owner"
+          }
+        ],
+        "transactions": [
+          {
+            "uuid": "18f597f63b4d29ec09a9b517ccf0eb95a73521f9",
+            "settled": true,
+            "operation_date": "2026-08-03",
+            "value_date": "2026-08-03",
+            "amount": -50.06,
+            "currency": "EUR",
+            "description": "Pago en WWW.AMAZON*",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "1dd3516f17179fd8997e07601a86a9f58ef0dc89",
+            "settled": true,
+            "operation_date": "2026-08-08",
+            "value_date": "2026-08-08",
+            "amount": -11.83,
+            "currency": "EUR",
+            "description": "BOLT.26253441",
+            "categorization": {
+              "type": 11
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "df6a23e3c2442fd387f238f6c5672859da766040",
+            "settled": true,
+            "operation_date": "2026-08-09",
+            "value_date": "2026-08-09",
+            "amount": -63.79,
+            "currency": "EUR",
+            "description": "12858115 ENRIQUE TOMAS",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "dac12d6250b5730ed87c855e16946986b5cf5508",
+            "settled": true,
+            "operation_date": "2026-08-09",
+            "value_date": "2026-08-09",
+            "amount": -13.95,
+            "currency": "EUR",
+            "description": "185 47256674",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "1aa26251eb7a1ad2109e61764176ab397d760ffb",
+            "settled": true,
+            "operation_date": "2026-08-12",
+            "value_date": "2026-08-12",
+            "amount": -67.4,
+            "currency": "EUR",
+            "description": "DIQUE2",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "d86966f99528453ebbc099e2f77acd4c86e292af",
+            "settled": true,
+            "operation_date": "2026-08-18",
+            "value_date": "2026-08-18",
+            "amount": -100.4,
+            "currency": "EUR",
+            "description": "Pago EN CAZO OMOTRREL VIRCARIMA",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "f7465152118a5e0bcadfcd40b1b1d39a21284711",
+            "settled": true,
+            "operation_date": "2026-08-18",
+            "value_date": "2026-08-18",
+            "amount": -10.53,
+            "currency": "EUR",
+            "description": "DIA 106",
+            "categorization": {
+              "type": 2
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "26f0879ed4d8c541c713897d8d1e6001789831ce",
+            "settled": true,
+            "operation_date": "2026-08-23",
+            "value_date": "2026-08-23",
+            "amount": -41.24,
+            "currency": "EUR",
+            "description": "Pago en SUPERMERCADO COSTTO ALHAMA DE MUR",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "ea1dd9741c1970f91989514c290c4d1c0dd84753",
+            "settled": true,
+            "operation_date": "2026-08-27",
+            "value_date": "2026-08-27",
+            "amount": -120.15,
+            "currency": "EUR",
+            "description": "Pago en WWW.AMAZON* 18628577 LUXEMBOURG",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "e125d0b967f1c3969d90d37b8f84f45db2c2f832",
+            "settled": true,
+            "operation_date": "2026-09-01",
+            "value_date": "2026-09-01",
+            "amount": -0.93,
+            "currency": "EUR",
+            "description": "Abono por campaña Plan Viaje Cam.Divisa WAL MART AJEASCALIENT",
+            "categorization": {
+              "type": 11
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "5ad6dfbfd7a21ea7ffc2428344595c80637a3bdc",
+            "settled": true,
+            "operation_date": "2026-09-02",
+            "value_date": "2026-09-02",
+            "amount": -91.46,
+            "currency": "EUR",
+            "description": "Pago en EL CORTE INGLES VENTA DIS MADRID",
+            "categorization": {
+              "type": 5
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "962b6bd7976054582e1f620a4098720e90003d70",
+            "settled": true,
+            "operation_date": "2026-09-03",
+            "value_date": "2026-09-03",
+            "amount": -47.53,
+            "currency": "EUR",
+            "description": "01025688 ENRIQUE TOMAS",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "ebe28df6e3f53606f728721eca0c26adfffd61fd",
+            "settled": true,
+            "operation_date": "2026-09-11",
+            "value_date": "2026-09-11",
+            "amount": -296.45,
+            "currency": "EUR",
+            "description": "CAJERO CAJERO BAN OF.533",
+            "categorization": {
+              "type": 15
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "712a8d06914fe7c84c87ebecf19e28a12ec9ceb2",
+            "settled": true,
+            "operation_date": "2026-09-17",
+            "value_date": "2026-09-17",
+            "amount": -20.87,
+            "currency": "EUR",
+            "description": "Pago EN PRODIZ LEVARDA RARKE",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "da52a2b02498a248741a5c841d1c0f20b95ce502",
+            "settled": true,
+            "operation_date": "2026-09-19",
+            "value_date": "2026-09-19",
+            "amount": -278.61,
+            "currency": "EUR",
+            "description": "Pago EN BORKARO ERLONTEMAANDIZ VELINCEE",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "aeed7fce2fd28a98e837d5e990af72ccdbe5be08",
+            "settled": true,
+            "operation_date": "2026-09-20",
+            "value_date": "2026-09-20",
+            "amount": -29.2,
+            "currency": "EUR",
+            "description": "522 76406468",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "ece676e912409957dab8962f10e9853e2d75a05d",
+            "settled": true,
+            "operation_date": "2026-09-22",
+            "value_date": "2026-09-22",
+            "amount": -9.81,
+            "currency": "EUR",
+            "description": "Pago en DISTRIBUCION HORTICOLA MADRID",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "b0522d220adfa7731b44832cebbaa21fd064bee3",
+            "settled": true,
+            "operation_date": "2026-09-24",
+            "value_date": "2026-09-24",
+            "amount": -2.05,
+            "currency": "EUR",
+            "description": "Abono por campaña Plan Viaje Cam.Divisa WAL MART AGUASCALIENT",
+            "categorization": {
+              "type": 11
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "a522cb52c5095957398b9688570e61cac5a5c5b1",
+            "settled": true,
+            "operation_date": "2026-09-27",
+            "value_date": "2026-09-27",
+            "amount": -1.69,
+            "currency": "EUR",
+            "description": "Pago en PANISHOP ACACIAS MADRID",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "5923929ef4fcb9e217e9ab252f5f1cbc4b558332",
+            "settled": true,
+            "operation_date": "2026-10-05",
+            "value_date": "2026-10-05",
+            "amount": -8.64,
+            "currency": "EUR",
+            "description": "Pago en MOEVE MUCHAMIEL ALMAINA (PARK",
+            "categorization": {
+              "type": 11
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "e548a27ca9722ad8642e930d145be4ee39f703a3",
+            "settled": true,
+            "operation_date": "2026-10-06",
+            "value_date": "2026-10-06",
+            "amount": -3.98,
+            "currency": "EUR",
+            "description": "DAPINO GELATO ITALIANO",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "1580596d2c06221aba454aaccbe7561ba31d475d",
+            "settled": true,
+            "operation_date": "2026-10-18",
+            "value_date": "2026-10-18",
+            "amount": -92.34,
+            "currency": "EUR",
+            "description": "Pago en PAYPAL *PAGO 210 PLAZOS 49585934",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "d4dbf137eca72d22ab5316ba377847d1c5eb2df6",
+            "settled": true,
+            "operation_date": "2026-10-20",
+            "value_date": "2026-10-20",
+            "amount": -4.5,
+            "currency": "EUR",
+            "description": "Pago en MOMENTS TARRAGONA",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "754f4a5b1f7fdc49bdd0d761ad8d6616770b0089",
+            "settled": true,
+            "operation_date": "2026-10-20",
+            "value_date": "2026-10-20",
+            "amount": -123.71,
+            "currency": "EUR",
+            "description": "Pago en MERCADONA AVD. CATALUNA 175 ZARAGOZA",
+            "categorization": {
+              "type": 2
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "1bf1e9ea236d7f4a0b26785ebbc06392f664d8bd",
+            "settled": true,
+            "operation_date": "2026-10-24",
+            "value_date": "2026-10-24",
+            "amount": -16.57,
+            "currency": "EUR",
+            "description": "Pago en Tynda Bakariid Keflavik",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "9830a811f5a999b11da7016dd4bf24a5ca1e09dc",
+            "settled": true,
+            "operation_date": "2026-10-24",
+            "value_date": "2026-10-24",
+            "amount": -23.98,
+            "currency": "EUR",
+            "description": "COMPRA COMERCIO AJENO | SUPERMERC.ULTRAMAR.ALIMEN(TPV) | DUCAVAL | HORNO DE ALCE",
+            "categorization": {
+              "type": 2
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "78ffcc1e3a1c6895824f07ab6b6638aae2e693d2",
+            "settled": true,
+            "operation_date": "2026-10-24",
+            "value_date": "2026-10-24",
+            "amount": -5.33,
+            "currency": "EUR",
+            "description": "Pago en BAR PAPAGAYO ALHAMA DE MUR",
+            "categorization": {
+              "type": 12
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "b95c64ef5cc753de8281d8c2d8de1e6776fff834",
+            "settled": true,
+            "operation_date": "2026-10-25",
+            "value_date": "2026-10-25",
+            "amount": -88.61,
+            "currency": "EUR",
+            "description": "Pago en WWW.AMAZON* 16768905 LUXEMBOURG",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          },
+          {
+            "uuid": "1a999db961257dc62a407959ddae3dafa21d294c",
+            "settled": true,
+            "operation_date": "2026-10-26",
+            "value_date": "2026-10-26",
+            "amount": -35.65,
+            "currency": "EUR",
+            "description": "Pago en Temu.com Dublin",
+            "categorization": {
+              "type": 0
+            },
+            "additional_info": []
+          }
+        ]
+      }
+    ],
+    "loans": [
+      {
+        "uuid": "45c6217769db39c5f298747a005c068cfe0fc108",
+        "contract_number": "PRT-696F451A54",
+        "loan_type": "HIPOTECA VIVIENDA",
+        "constitution_date": "2015-06-01",
+        "currency": "EUR",
+        "granted_capital": 199800,
+        "pending_amount": 122032.12,
+        "next_installment": 856.61,
+        "linked_account": "ES9899996423311680080297",
+        "holders": [
+          {
+            "id": "05249217L",
+            "name": "ANTONIO MACHINE"
+          }
+        ],
+        "interest_rate": 2.1,
+        "expiration_date": "2040-06-01",
+        "pending_receipts": 164,
+        "amortization_made": [
+          {
+            "uuid": "704b08b57d0530fc75f4c41db788a7a39222a848",
+            "date": "2026-08-01",
+            "amortized": 639.71,
+            "interest": 216.92,
+            "total": 856.63,
+            "pending_capital": 123314.87,
+            "operation_type": "receipt_paid"
+          },
+          {
+            "uuid": "26e61394fcf35023f6103e034603755be6ee3a7a",
+            "date": "2026-09-01",
+            "amortized": 640.81,
+            "interest": 215.81,
+            "total": 856.62,
+            "pending_capital": 122674.06,
+            "operation_type": "receipt_paid"
+          },
+          {
+            "uuid": "10c41f22457dd026f45d91f911ae4ae89ac94a23",
+            "date": "2026-10-01",
+            "amortized": 641.94,
+            "interest": 214.69,
+            "total": 856.63,
+            "pending_capital": 122032.12,
+            "operation_type": "receipt_paid"
+          }
+        ],
+        "amortization_pending": [
+          {
+            "uuid": "fc21edc0498b232fb5de771a2ade01ed0a8b063a",
+            "date": "2026-11-01",
+            "amortized": 643.06,
+            "interest": 213.55,
+            "total": 856.61,
+            "pending_capital": 121389.06,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "9f08f2d3c0b42d0d44602af936ad2010b59c851c",
+            "date": "2026-12-01",
+            "amortized": 644.19,
+            "interest": 212.43,
+            "total": 856.62,
+            "pending_capital": 120744.87,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "33a26fc0454a5df003e90436104f595efdb9b8d3",
+            "date": "2027-01-01",
+            "amortized": 645.32,
+            "interest": 211.3,
+            "total": 856.62,
+            "pending_capital": 120099.55,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "609a40def849b25c6b5bc840a7e627f0bda0b850",
+            "date": "2027-02-01",
+            "amortized": 646.44,
+            "interest": 210.18,
+            "total": 856.62,
+            "pending_capital": 119453.11,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "fb247bd71220cbd5bba25e9046f4003f673ad67d",
+            "date": "2027-03-01",
+            "amortized": 647.58,
+            "interest": 209.05,
+            "total": 856.63,
+            "pending_capital": 118805.53,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "3193e4c5e230adcaa8a7bfc58572b62de989bb6e",
+            "date": "2027-04-01",
+            "amortized": 648.71,
+            "interest": 207.91,
+            "total": 856.62,
+            "pending_capital": 118156.82,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "20d69358ac16546916c2ba92d4e9e2306791968f",
+            "date": "2027-05-01",
+            "amortized": 649.84,
+            "interest": 206.77,
+            "total": 856.61,
+            "pending_capital": 117506.98,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "1b98a56faefafbb88e4bcca74205f4566ea6fdb3",
+            "date": "2027-06-01",
+            "amortized": 650.99,
+            "interest": 205.64,
+            "total": 856.63,
+            "pending_capital": 116855.99,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "979296be63f73958cf983cf0fde03758ec341fd3",
+            "date": "2027-07-01",
+            "amortized": 652.12,
+            "interest": 204.5,
+            "total": 856.62,
+            "pending_capital": 116203.87,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "017fb98c869d579c1bdce384b6d97b65d0d8bdce",
+            "date": "2027-08-01",
+            "amortized": 653.27,
+            "interest": 203.35,
+            "total": 856.62,
+            "pending_capital": 115550.6,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "10e6f7d9bb564e1d146863e24890d609d86820d2",
+            "date": "2027-09-01",
+            "amortized": 654.41,
+            "interest": 202.21,
+            "total": 856.62,
+            "pending_capital": 114896.19,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "8595f70d4a4361d23cf8202f08e7908569b3009d",
+            "date": "2027-10-01",
+            "amortized": 655.56,
+            "interest": 201.07,
+            "total": 856.63,
+            "pending_capital": 114240.63,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "2e408dd7b74244560ce96ace222ce297689bf8ae",
+            "date": "2027-11-01",
+            "amortized": 656.69,
+            "interest": 199.92,
+            "total": 856.61,
+            "pending_capital": 113583.94,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "43b27377455c2344b3de8ce3f48724edd0019220",
+            "date": "2027-12-01",
+            "amortized": 657.86,
+            "interest": 198.77,
+            "total": 856.63,
+            "pending_capital": 112926.08,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "247a110b6305bed6edc47d72e59be7d6903fe215",
+            "date": "2028-01-01",
+            "amortized": 658.99,
+            "interest": 197.62,
+            "total": 856.61,
+            "pending_capital": 112267.09,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "3380dae2924596db732b5a4485df4c7112560d74",
+            "date": "2028-02-01",
+            "amortized": 660.15,
+            "interest": 196.47,
+            "total": 856.62,
+            "pending_capital": 111606.94,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "a0db58c2e4480f7a4de2a38e487a18d6e479e1b8",
+            "date": "2028-03-01",
+            "amortized": 661.31,
+            "interest": 195.32,
+            "total": 856.63,
+            "pending_capital": 110945.63,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "848a7dcb2774d861c9d5a24390c1e1af9df6ae05",
+            "date": "2028-04-01",
+            "amortized": 662.47,
+            "interest": 194.15,
+            "total": 856.62,
+            "pending_capital": 110283.16,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "70d597fa267d7529121637210698d4da9267e364",
+            "date": "2028-05-01",
+            "amortized": 663.62,
+            "interest": 193,
+            "total": 856.62,
+            "pending_capital": 109619.54,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "e2a9cc04fd7576e74e093f50c745177ae4437504",
+            "date": "2028-06-01",
+            "amortized": 664.79,
+            "interest": 191.83,
+            "total": 856.62,
+            "pending_capital": 108954.75,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "06f2cf98eb754c9a3854261a7929bcd7a9ad56c3",
+            "date": "2028-07-01",
+            "amortized": 665.95,
+            "interest": 190.68,
+            "total": 856.63,
+            "pending_capital": 108288.8,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "aa85134706f926e68cf167f0fce59df3c6cb66d1",
+            "date": "2028-08-01",
+            "amortized": 667.11,
+            "interest": 189.51,
+            "total": 856.62,
+            "pending_capital": 107621.69,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "ca5089a7b30d7d9fd74f6e3cdb0a2893b5104905",
+            "date": "2028-09-01",
+            "amortized": 668.28,
+            "interest": 188.33,
+            "total": 856.61,
+            "pending_capital": 106953.41,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "6cea0c5278871090703b78fb26b3ee96811167cd",
+            "date": "2028-10-01",
+            "amortized": 669.46,
+            "interest": 187.17,
+            "total": 856.63,
+            "pending_capital": 106283.95,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "4caa6f5d80d949834769cbaebfdc6177b6c792c5",
+            "date": "2028-11-01",
+            "amortized": 670.62,
+            "interest": 185.99,
+            "total": 856.61,
+            "pending_capital": 105613.33,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "e4ed938b9495985a18c886624e10d4ff6573dc5b",
+            "date": "2028-12-01",
+            "amortized": 671.8,
+            "interest": 184.83,
+            "total": 856.63,
+            "pending_capital": 104941.53,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "ba8145a425ad1f8f271735a09d3c5a66cfe2e107",
+            "date": "2029-01-01",
+            "amortized": 672.97,
+            "interest": 183.65,
+            "total": 856.62,
+            "pending_capital": 104268.56,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "cb9be0b087ff9635e0a562ae11dec89d69dde677",
+            "date": "2029-02-01",
+            "amortized": 674.15,
+            "interest": 182.47,
+            "total": 856.62,
+            "pending_capital": 103594.41,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "a0e8588bbd3ae83423543e8dfeece90bed5ffd9f",
+            "date": "2029-03-01",
+            "amortized": 675.33,
+            "interest": 181.29,
+            "total": 856.62,
+            "pending_capital": 102919.08,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "969562a8e59a038e841ff93f02356c8f85f15804",
+            "date": "2029-04-01",
+            "amortized": 676.51,
+            "interest": 180.11,
+            "total": 856.62,
+            "pending_capital": 102242.57,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "61ef98a3c949cca952fb42e299a7b3d36f0d24c6",
+            "date": "2029-05-01",
+            "amortized": 677.7,
+            "interest": 178.92,
+            "total": 856.62,
+            "pending_capital": 101564.87,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "821680c990491e7b9d8e8cb40b7023af444e1cbd",
+            "date": "2029-06-01",
+            "amortized": 678.89,
+            "interest": 177.73,
+            "total": 856.62,
+            "pending_capital": 100885.98,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "4a2658254dd3d66f610a08fb7242def07f5bfa36",
+            "date": "2029-07-01",
+            "amortized": 680.08,
+            "interest": 176.55,
+            "total": 856.63,
+            "pending_capital": 100205.9,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "88e43cc5575dfdc5822af7862c363bdf2bab5937",
+            "date": "2029-08-01",
+            "amortized": 681.26,
+            "interest": 175.36,
+            "total": 856.62,
+            "pending_capital": 99524.64,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "7ea87a548c848dd0d15daa00de14824f65de0db8",
+            "date": "2029-09-01",
+            "amortized": 682.45,
+            "interest": 174.17,
+            "total": 856.62,
+            "pending_capital": 98842.19,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "c4d2a602a8106a31a63a1a06afcd46093b3da524",
+            "date": "2029-10-01",
+            "amortized": 683.65,
+            "interest": 172.97,
+            "total": 856.62,
+            "pending_capital": 98158.54,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "064f70b7a72fe4d7b09695ec3ac49d07437234d9",
+            "date": "2029-11-01",
+            "amortized": 684.84,
+            "interest": 171.77,
+            "total": 856.61,
+            "pending_capital": 97473.7,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "f10560d12dba2f7296132586b36136148d355045",
+            "date": "2029-12-01",
+            "amortized": 686.05,
+            "interest": 170.57,
+            "total": 856.62,
+            "pending_capital": 96787.65,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "eae576025d8868f44f45c23fbdaa616b20394d89",
+            "date": "2030-01-01",
+            "amortized": 687.25,
+            "interest": 169.37,
+            "total": 856.62,
+            "pending_capital": 96100.4,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "1275264a02fc5141548cc3585d44338506945c57",
+            "date": "2030-02-01",
+            "amortized": 688.44,
+            "interest": 168.18,
+            "total": 856.62,
+            "pending_capital": 95411.96,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "7120a2378a8bac2ded657281abeb8907eda23e39",
+            "date": "2030-03-01",
+            "amortized": 689.65,
+            "interest": 166.97,
+            "total": 856.62,
+            "pending_capital": 94722.31,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "b1b0b62f446a58fda30d19d1a47688e4e8c666e3",
+            "date": "2030-04-01",
+            "amortized": 690.86,
+            "interest": 165.77,
+            "total": 856.63,
+            "pending_capital": 94031.45,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "78b14f5bc4fa8e8a4cc891f265389278b4fb3e15",
+            "date": "2030-05-01",
+            "amortized": 692.06,
+            "interest": 164.56,
+            "total": 856.62,
+            "pending_capital": 93339.39,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "048827c41077ee8b0146dae34d72f1d1f6f84e74",
+            "date": "2030-06-01",
+            "amortized": 693.27,
+            "interest": 163.35,
+            "total": 856.62,
+            "pending_capital": 92646.12,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "aa5143c155f2bc5c5339a25d9e01c25d00f53541",
+            "date": "2030-07-01",
+            "amortized": 694.5,
+            "interest": 162.13,
+            "total": 856.63,
+            "pending_capital": 91951.62,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "0bb6cb26a8ddc0a16fef999654b9b75a1984d412",
+            "date": "2030-08-01",
+            "amortized": 695.7,
+            "interest": 160.92,
+            "total": 856.62,
+            "pending_capital": 91255.92,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "7bc98562f61d64b256b235b462b400bc927c6c01",
+            "date": "2030-09-01",
+            "amortized": 696.93,
+            "interest": 159.7,
+            "total": 856.63,
+            "pending_capital": 90558.99,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "7e89efe12a4b97f420df46b42d4e8e1d8c696088",
+            "date": "2030-10-01",
+            "amortized": 698.14,
+            "interest": 158.47,
+            "total": 856.61,
+            "pending_capital": 89860.85,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "4ad63a1b12c797e99d681164dc10baa8642b8a36",
+            "date": "2030-11-01",
+            "amortized": 699.37,
+            "interest": 157.25,
+            "total": 856.62,
+            "pending_capital": 89161.48,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "59215691bca3a679860ea370475f9c8897525af4",
+            "date": "2030-12-01",
+            "amortized": 700.58,
+            "interest": 156.03,
+            "total": 856.61,
+            "pending_capital": 88460.9,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "7bce7e19a5e20ce1d91e98ca431f38c86bcdcc6e",
+            "date": "2031-01-01",
+            "amortized": 701.81,
+            "interest": 154.81,
+            "total": 856.62,
+            "pending_capital": 87759.09,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "ed19392ac4329455cf666100b60e6edc1b6414b4",
+            "date": "2031-02-01",
+            "amortized": 703.04,
+            "interest": 153.58,
+            "total": 856.62,
+            "pending_capital": 87056.05,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "835269b8992a2f6e936ca01c64632d69294d6da2",
+            "date": "2031-03-01",
+            "amortized": 704.28,
+            "interest": 152.35,
+            "total": 856.63,
+            "pending_capital": 86351.77,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "9e86908f72b6ed53e20120d87d7ea44200696b66",
+            "date": "2031-04-01",
+            "amortized": 705.5,
+            "interest": 151.12,
+            "total": 856.62,
+            "pending_capital": 85646.27,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "e88608daeeb219523ccc76d570c23616e09043d4",
+            "date": "2031-05-01",
+            "amortized": 706.74,
+            "interest": 149.88,
+            "total": 856.62,
+            "pending_capital": 84939.53,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d771046b3486b2372aad1c42e9ed197a2aa0f529",
+            "date": "2031-06-01",
+            "amortized": 707.98,
+            "interest": 148.64,
+            "total": 856.62,
+            "pending_capital": 84231.55,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "21ee788a622b2ad2cab81bb827d251fb1d7dd89a",
+            "date": "2031-07-01",
+            "amortized": 709.21,
+            "interest": 147.41,
+            "total": 856.62,
+            "pending_capital": 83522.34,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "f1acb0b7b8928ab75eba54f45b8d2e15b6fdaaea",
+            "date": "2031-08-01",
+            "amortized": 710.46,
+            "interest": 146.16,
+            "total": 856.62,
+            "pending_capital": 82811.88,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "1547e1e06f2558e690320a6141b30e1b9b204845",
+            "date": "2031-09-01",
+            "amortized": 711.7,
+            "interest": 144.92,
+            "total": 856.62,
+            "pending_capital": 82100.18,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "70b34b917a3e40357f0f5b6beb4a0f145558ea24",
+            "date": "2031-10-01",
+            "amortized": 712.94,
+            "interest": 143.68,
+            "total": 856.62,
+            "pending_capital": 81387.24,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "26223a8e32b9eaef80bea636f378b593149a8f37",
+            "date": "2031-11-01",
+            "amortized": 714.19,
+            "interest": 142.42,
+            "total": 856.61,
+            "pending_capital": 80673.05,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "fbdb86d845ff7db366d10344077721130f1a4d2b",
+            "date": "2031-12-01",
+            "amortized": 715.44,
+            "interest": 141.18,
+            "total": 856.62,
+            "pending_capital": 79957.61,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "846b76fbe9447a8d9d285d4f324d7e89f7f65636",
+            "date": "2032-01-01",
+            "amortized": 716.7,
+            "interest": 139.93,
+            "total": 856.63,
+            "pending_capital": 79240.91,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "60d94cdd5d404fc436edbe319fb0fcfc216860e8",
+            "date": "2032-02-01",
+            "amortized": 717.94,
+            "interest": 138.67,
+            "total": 856.61,
+            "pending_capital": 78522.97,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "834ae71d308ef9f362867c14d969a648556f88b2",
+            "date": "2032-03-01",
+            "amortized": 719.21,
+            "interest": 137.42,
+            "total": 856.63,
+            "pending_capital": 77803.76,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "56876d27f4706c7f4221491095fc914623ec0836",
+            "date": "2032-04-01",
+            "amortized": 720.46,
+            "interest": 136.15,
+            "total": 856.61,
+            "pending_capital": 77083.3,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "e8e3945d6c21963d76843adaa1b82e32eaff860c",
+            "date": "2032-05-01",
+            "amortized": 721.73,
+            "interest": 134.9,
+            "total": 856.63,
+            "pending_capital": 76361.57,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d0513ff8fd57e77a2a40a65c2603e34e0b017580",
+            "date": "2032-06-01",
+            "amortized": 722.98,
+            "interest": 133.63,
+            "total": 856.61,
+            "pending_capital": 75638.59,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "756898f9a0f7543bcd24b575f703c12299864127",
+            "date": "2032-07-01",
+            "amortized": 724.26,
+            "interest": 132.37,
+            "total": 856.63,
+            "pending_capital": 74914.33,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d4820f222fbaa38b046971e7370b890bee923427",
+            "date": "2032-08-01",
+            "amortized": 725.52,
+            "interest": 131.1,
+            "total": 856.62,
+            "pending_capital": 74188.81,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "ffa5156c046634071c394646788d2004786ffa70",
+            "date": "2032-09-01",
+            "amortized": 726.79,
+            "interest": 129.83,
+            "total": 856.62,
+            "pending_capital": 73462.02,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "daf7595b7757df4abe6deded592cc08e58cb624f",
+            "date": "2032-10-01",
+            "amortized": 728.06,
+            "interest": 128.56,
+            "total": 856.62,
+            "pending_capital": 72733.96,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "afe3257c760567c00e6562b6546e0b8e5c41c87e",
+            "date": "2032-11-01",
+            "amortized": 729.34,
+            "interest": 127.28,
+            "total": 856.62,
+            "pending_capital": 72004.62,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "5288dc9555d4079c549993a8b0a0428a4376acc8",
+            "date": "2032-12-01",
+            "amortized": 730.61,
+            "interest": 126.01,
+            "total": 856.62,
+            "pending_capital": 71274.01,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "793d1839e50ea09aadecbc84146aa768b508e04e",
+            "date": "2033-01-01",
+            "amortized": 731.89,
+            "interest": 124.73,
+            "total": 856.62,
+            "pending_capital": 70542.12,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "11906df8dc09eb6fc3735e2ea6ff511caa22ba8d",
+            "date": "2033-02-01",
+            "amortized": 733.17,
+            "interest": 123.45,
+            "total": 856.62,
+            "pending_capital": 69808.95,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "b2086669aca161d8b1112b37a8406880af015dae",
+            "date": "2033-03-01",
+            "amortized": 734.45,
+            "interest": 122.17,
+            "total": 856.62,
+            "pending_capital": 69074.5,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "79b23665b13c3f3e2f380c64eee319e66cc1c6c1",
+            "date": "2033-04-01",
+            "amortized": 735.74,
+            "interest": 120.88,
+            "total": 856.62,
+            "pending_capital": 68338.76,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "26714e7b1520a388ac4cbc74bea06bd0ea34875d",
+            "date": "2033-05-01",
+            "amortized": 737.03,
+            "interest": 119.59,
+            "total": 856.62,
+            "pending_capital": 67601.73,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "9a955f30c5f955810370b74e1abbbecbb7106ffc",
+            "date": "2033-06-01",
+            "amortized": 738.32,
+            "interest": 118.3,
+            "total": 856.62,
+            "pending_capital": 66863.41,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "88b250f701c6f5dd94ec436cb948889ff3c8a9fe",
+            "date": "2033-07-01",
+            "amortized": 739.6,
+            "interest": 117.02,
+            "total": 856.62,
+            "pending_capital": 66123.81,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "57b11d0628943e5df64655f2def1fa44177d300f",
+            "date": "2033-08-01",
+            "amortized": 740.9,
+            "interest": 115.72,
+            "total": 856.62,
+            "pending_capital": 65382.91,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "5d268b21cbb83064156028df6d63f26303bd7e7b",
+            "date": "2033-09-01",
+            "amortized": 742.2,
+            "interest": 114.42,
+            "total": 856.62,
+            "pending_capital": 64640.71,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d018cdede11a949b5c83b634de27e10f7c23cce5",
+            "date": "2033-10-01",
+            "amortized": 743.5,
+            "interest": 113.12,
+            "total": 856.62,
+            "pending_capital": 63897.21,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "bb508944cff4e55b3491b34dfb8fb48ed81ceb69",
+            "date": "2033-11-01",
+            "amortized": 744.8,
+            "interest": 111.82,
+            "total": 856.62,
+            "pending_capital": 63152.41,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "b9c55d043492b2f09908d82336e0b7e891b47414",
+            "date": "2033-12-01",
+            "amortized": 746.11,
+            "interest": 110.51,
+            "total": 856.62,
+            "pending_capital": 62406.3,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "21c7c20bdbc2f64bb6d7cb98b1badf5cf978ba00",
+            "date": "2034-01-01",
+            "amortized": 747.41,
+            "interest": 109.21,
+            "total": 856.62,
+            "pending_capital": 61658.89,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "297db5d9fec00028b4e8424d069a56562833c672",
+            "date": "2034-02-01",
+            "amortized": 748.72,
+            "interest": 107.9,
+            "total": 856.62,
+            "pending_capital": 60910.17,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "2de5e3f517821e22e19bc697ea335fc05f8c548e",
+            "date": "2034-03-01",
+            "amortized": 750.02,
+            "interest": 106.59,
+            "total": 856.61,
+            "pending_capital": 60160.15,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "45f1c53a20447da7c2958ea29088f4cbac77caa8",
+            "date": "2034-04-01",
+            "amortized": 751.34,
+            "interest": 105.28,
+            "total": 856.62,
+            "pending_capital": 59408.81,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "4306ba561c1dcf1c9eaad40425e4fda86c22f4c6",
+            "date": "2034-05-01",
+            "amortized": 752.66,
+            "interest": 103.96,
+            "total": 856.62,
+            "pending_capital": 58656.15,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "0f25f355a0f0d89edfb50351b0299cd2c3d8c109",
+            "date": "2034-06-01",
+            "amortized": 753.97,
+            "interest": 102.65,
+            "total": 856.62,
+            "pending_capital": 57902.18,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "8e24065f6d0a7e299e562c89c78e66c335d9d729",
+            "date": "2034-07-01",
+            "amortized": 755.28,
+            "interest": 101.33,
+            "total": 856.61,
+            "pending_capital": 57146.9,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "f2ed3522b856917709211bea6e5814ed4bc75aa2",
+            "date": "2034-08-01",
+            "amortized": 756.61,
+            "interest": 100.01,
+            "total": 856.62,
+            "pending_capital": 56390.29,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "2bbf2235296d2faf72c5272b31b38b26f2be24e1",
+            "date": "2034-09-01",
+            "amortized": 757.94,
+            "interest": 98.68,
+            "total": 856.62,
+            "pending_capital": 55632.35,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d002772ec1a6062b67812aaaa8043e51c93da4b9",
+            "date": "2034-10-01",
+            "amortized": 759.27,
+            "interest": 97.36,
+            "total": 856.63,
+            "pending_capital": 54873.08,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "c3e1f83a180fba101347879614a1c1a802b48f6e",
+            "date": "2034-11-01",
+            "amortized": 760.59,
+            "interest": 96.03,
+            "total": 856.62,
+            "pending_capital": 54112.49,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "eae6cb9aa572c79ec2444313c341bb7558799633",
+            "date": "2034-12-01",
+            "amortized": 761.93,
+            "interest": 94.69,
+            "total": 856.62,
+            "pending_capital": 53350.56,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "125f81fcece369c59fd9becac75d1e1baa9c045a",
+            "date": "2035-01-01",
+            "amortized": 763.26,
+            "interest": 93.36,
+            "total": 856.62,
+            "pending_capital": 52587.3,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "258adbf1a41604cd7b7e885ec3a586f02c46a418",
+            "date": "2035-02-01",
+            "amortized": 764.59,
+            "interest": 92.03,
+            "total": 856.62,
+            "pending_capital": 51822.71,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "5f64cc4e709554ec86d33fbab4e46ed40b1ef1be",
+            "date": "2035-03-01",
+            "amortized": 765.93,
+            "interest": 90.69,
+            "total": 856.62,
+            "pending_capital": 51056.78,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "a65e7f36af9f0b34afaa8a938903485c54cb39d2",
+            "date": "2035-04-01",
+            "amortized": 767.28,
+            "interest": 89.34,
+            "total": 856.62,
+            "pending_capital": 50289.5,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d3dffbec02a195f824fde5d05c675a4f77209d23",
+            "date": "2035-05-01",
+            "amortized": 768.6,
+            "interest": 88.01,
+            "total": 856.61,
+            "pending_capital": 49520.9,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "42c84fd3fae21bb8999c5806f6939d2560ca6a8a",
+            "date": "2035-06-01",
+            "amortized": 769.97,
+            "interest": 86.66,
+            "total": 856.63,
+            "pending_capital": 48750.93,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "6675edf2ad651e1ba1602fef613ff51dff98f074",
+            "date": "2035-07-01",
+            "amortized": 771.3,
+            "interest": 85.31,
+            "total": 856.61,
+            "pending_capital": 47979.63,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "ce18e6517dfcad0e8b2abfa442c6f69706da85f0",
+            "date": "2035-08-01",
+            "amortized": 772.66,
+            "interest": 83.96,
+            "total": 856.62,
+            "pending_capital": 47206.97,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "62a169c55d9a95c06bde9ae0de10d933046743fe",
+            "date": "2035-09-01",
+            "amortized": 774,
+            "interest": 82.62,
+            "total": 856.62,
+            "pending_capital": 46432.97,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "f163f322a6cd572154aaaa57a40fdd36809864e9",
+            "date": "2035-10-01",
+            "amortized": 775.36,
+            "interest": 81.26,
+            "total": 856.62,
+            "pending_capital": 45657.61,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "3e093abde7d59776727de3d1fa0776f1c8c9a4c8",
+            "date": "2035-11-01",
+            "amortized": 776.72,
+            "interest": 79.9,
+            "total": 856.62,
+            "pending_capital": 44880.89,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "69239d174efa538cb833bcae29a84d58b0160312",
+            "date": "2035-12-01",
+            "amortized": 778.08,
+            "interest": 78.54,
+            "total": 856.62,
+            "pending_capital": 44102.81,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "0bc764b701583bc0a4fc80ddc6424dcac6b7d10b",
+            "date": "2036-01-01",
+            "amortized": 779.44,
+            "interest": 77.18,
+            "total": 856.62,
+            "pending_capital": 43323.37,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "11588e1ed51deeaa39230792754463a8a0b30b01",
+            "date": "2036-02-01",
+            "amortized": 780.81,
+            "interest": 75.81,
+            "total": 856.62,
+            "pending_capital": 42542.56,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d1664e4b48a4b7379db695116d996343def358b2",
+            "date": "2036-03-01",
+            "amortized": 782.17,
+            "interest": 74.45,
+            "total": 856.62,
+            "pending_capital": 41760.39,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "95c16525376f51c26f2ceb620c58227aae66c0bb",
+            "date": "2036-04-01",
+            "amortized": 783.54,
+            "interest": 73.08,
+            "total": 856.62,
+            "pending_capital": 40976.85,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "ad58e1ad3f5a687f8e26b40076509e7fcad40e1b",
+            "date": "2036-05-01",
+            "amortized": 784.92,
+            "interest": 71.71,
+            "total": 856.63,
+            "pending_capital": 40191.93,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "857060acc28b8d13dd0c949915c535e05119dafd",
+            "date": "2036-06-01",
+            "amortized": 786.28,
+            "interest": 70.34,
+            "total": 856.62,
+            "pending_capital": 39405.65,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "b7de2700259499df4104f2c847904b044064e3cf",
+            "date": "2036-07-01",
+            "amortized": 787.65,
+            "interest": 68.96,
+            "total": 856.61,
+            "pending_capital": 38618,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "28ce2ec98088d125470745534c95fd63cbc4e3ea",
+            "date": "2036-08-01",
+            "amortized": 789.04,
+            "interest": 67.58,
+            "total": 856.62,
+            "pending_capital": 37828.96,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "5507929520ce3771aac1876f5ea0f7c93003ac82",
+            "date": "2036-09-01",
+            "amortized": 790.42,
+            "interest": 66.2,
+            "total": 856.62,
+            "pending_capital": 37038.54,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "b57543eb59cd173b7dc3cde837d6bd7e5544de99",
+            "date": "2036-10-01",
+            "amortized": 791.81,
+            "interest": 64.81,
+            "total": 856.62,
+            "pending_capital": 36246.73,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "6fa59f8c239ec33eecbd004191c619d32e5cb1df",
+            "date": "2036-11-01",
+            "amortized": 793.19,
+            "interest": 63.44,
+            "total": 856.63,
+            "pending_capital": 35453.54,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d4654eb5aed685c3a0faef4ca876650a8cfa883c",
+            "date": "2036-12-01",
+            "amortized": 794.57,
+            "interest": 62.05,
+            "total": 856.62,
+            "pending_capital": 34658.97,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "af66ccfc51c1c28c6e6713b6d8eb3c7643ded745",
+            "date": "2037-01-01",
+            "amortized": 795.97,
+            "interest": 60.65,
+            "total": 856.62,
+            "pending_capital": 33863,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "dec4a311b3e675650596893a71394fb88f8af40f",
+            "date": "2037-02-01",
+            "amortized": 797.35,
+            "interest": 59.26,
+            "total": 856.61,
+            "pending_capital": 33065.65,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "92393486352b0d2975383ee58cee88b45c022202",
+            "date": "2037-03-01",
+            "amortized": 798.76,
+            "interest": 57.86,
+            "total": 856.62,
+            "pending_capital": 32266.89,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "1eba9aa14bb015541864a5b17fb1d82fcfdbbba0",
+            "date": "2037-04-01",
+            "amortized": 800.15,
+            "interest": 56.47,
+            "total": 856.62,
+            "pending_capital": 31466.74,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "692b7799430431e5db9fa2a9f5196315dc42a072",
+            "date": "2037-05-01",
+            "amortized": 801.56,
+            "interest": 55.07,
+            "total": 856.63,
+            "pending_capital": 30665.18,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "95ccc7b49343ae25cab10d3fdd1162b93bc72daa",
+            "date": "2037-06-01",
+            "amortized": 802.95,
+            "interest": 53.67,
+            "total": 856.62,
+            "pending_capital": 29862.23,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "ca6223c71ed2e4b3a0cb05b317266f5317ab6800",
+            "date": "2037-07-01",
+            "amortized": 804.36,
+            "interest": 52.26,
+            "total": 856.62,
+            "pending_capital": 29057.87,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d653398802200da174cde4463d2c183c68fb1cb2",
+            "date": "2037-08-01",
+            "amortized": 805.77,
+            "interest": 50.85,
+            "total": 856.62,
+            "pending_capital": 28252.1,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "5243fe20aa44db72f1e6f8dc098497a9eaa90a10",
+            "date": "2037-09-01",
+            "amortized": 807.18,
+            "interest": 49.44,
+            "total": 856.62,
+            "pending_capital": 27444.92,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "f39d814438c5c6f90c63ad305e81f1f66078fc60",
+            "date": "2037-10-01",
+            "amortized": 808.59,
+            "interest": 48.03,
+            "total": 856.62,
+            "pending_capital": 26636.33,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "c8ba14cb5d113fafd5519b78c6372857515cc0e4",
+            "date": "2037-11-01",
+            "amortized": 810.02,
+            "interest": 46.61,
+            "total": 856.63,
+            "pending_capital": 25826.31,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "d2f98aec21697c11b38a26a558c386c6bfc986e4",
+            "date": "2037-12-01",
+            "amortized": 811.42,
+            "interest": 45.2,
+            "total": 856.62,
+            "pending_capital": 25014.89,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "9d82046a15cf9a57752e467a5ff5543d029ba570",
+            "date": "2038-01-01",
+            "amortized": 812.84,
+            "interest": 43.78,
+            "total": 856.62,
+            "pending_capital": 24202.05,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "97ea1b085e711a8044b2239509a184382099bd86",
+            "date": "2038-02-01",
+            "amortized": 814.26,
+            "interest": 42.36,
+            "total": 856.62,
+            "pending_capital": 23387.79,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "6b88b463adcde8f5b78d36df721ef28515a7456d",
+            "date": "2038-03-01",
+            "amortized": 815.7,
+            "interest": 40.93,
+            "total": 856.63,
+            "pending_capital": 22572.09,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "e159cf924890c02efcb89162584a058ef03b6f98",
+            "date": "2038-04-01",
+            "amortized": 817.11,
+            "interest": 39.5,
+            "total": 856.61,
+            "pending_capital": 21754.98,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "1fa084b80942d0291820c40acf3c383c4b4026b1",
+            "date": "2038-05-01",
+            "amortized": 818.55,
+            "interest": 38.07,
+            "total": 856.62,
+            "pending_capital": 20936.43,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "21f222adb46febba1e43874b9cc8249fc3742711",
+            "date": "2038-06-01",
+            "amortized": 819.98,
+            "interest": 36.64,
+            "total": 856.62,
+            "pending_capital": 20116.45,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "a5df7b359025bc0830c970be4576b7df56188ebc",
+            "date": "2038-07-01",
+            "amortized": 821.41,
+            "interest": 35.21,
+            "total": 856.62,
+            "pending_capital": 19295.04,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "fbc2ba7a3bedf626921a1a4c1d0072d37b1ccceb",
+            "date": "2038-08-01",
+            "amortized": 822.85,
+            "interest": 33.77,
+            "total": 856.62,
+            "pending_capital": 18472.19,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "757b33c235b4c568e81d72c51e1029f735376029",
+            "date": "2038-09-01",
+            "amortized": 824.3,
+            "interest": 32.32,
+            "total": 856.62,
+            "pending_capital": 17647.89,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "9477d6c9e8705bf731d27a600984c70184076aa8",
+            "date": "2038-10-01",
+            "amortized": 825.74,
+            "interest": 30.88,
+            "total": 856.62,
+            "pending_capital": 16822.15,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "fbb02ce235b5eb82a2f1233564e26fdc90dad1ea",
+            "date": "2038-11-01",
+            "amortized": 827.18,
+            "interest": 29.44,
+            "total": 856.62,
+            "pending_capital": 15994.97,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "3d2f8ec959c8db78ec0edbdb757410f3447f875c",
+            "date": "2038-12-01",
+            "amortized": 828.63,
+            "interest": 27.99,
+            "total": 856.62,
+            "pending_capital": 15166.34,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "2419213d2e3ce3d67af2e1f427adaa3102fcb71d",
+            "date": "2039-01-01",
+            "amortized": 830.08,
+            "interest": 26.54,
+            "total": 856.62,
+            "pending_capital": 14336.26,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "70acb50a9a2418e324ba506d381d894fed66f37b",
+            "date": "2039-02-01",
+            "amortized": 831.53,
+            "interest": 25.09,
+            "total": 856.62,
+            "pending_capital": 13504.73,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "7b5133a2062ccff548bba994402062c730a170a5",
+            "date": "2039-03-01",
+            "amortized": 832.99,
+            "interest": 23.63,
+            "total": 856.62,
+            "pending_capital": 12671.74,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "b597ad63f7ea1622cb72b50220edfc74207ddc2f",
+            "date": "2039-04-01",
+            "amortized": 834.44,
+            "interest": 22.18,
+            "total": 856.62,
+            "pending_capital": 11837.3,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "6ee2cb4e4f41510631efd97e29c6e57c5f525b82",
+            "date": "2039-05-01",
+            "amortized": 835.91,
+            "interest": 20.71,
+            "total": 856.62,
+            "pending_capital": 11001.39,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "3fd0a4621e6734fa19d57350c79fbf3e2c0cf150",
+            "date": "2039-06-01",
+            "amortized": 837.38,
+            "interest": 19.25,
+            "total": 856.63,
+            "pending_capital": 10164.01,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "9c71b16df298c257431892e295063997f67c247f",
+            "date": "2039-07-01",
+            "amortized": 838.83,
+            "interest": 17.78,
+            "total": 856.61,
+            "pending_capital": 9325.18,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "a0ce974841ca891ebf025ebf93d327d9ca12f121",
+            "date": "2039-08-01",
+            "amortized": 840.31,
+            "interest": 16.32,
+            "total": 856.63,
+            "pending_capital": 8484.87,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "8c4db7b3d51f4e722c7d08db260bd90597ec39c1",
+            "date": "2039-09-01",
+            "amortized": 841.77,
+            "interest": 14.85,
+            "total": 856.62,
+            "pending_capital": 7643.1,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "c7d4cf2d9fd4d445b7fc2264919d62570e4467dd",
+            "date": "2039-10-01",
+            "amortized": 843.24,
+            "interest": 13.38,
+            "total": 856.62,
+            "pending_capital": 6799.86,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "7e78df4df2cbb84b1bcc7250ad12c3823f396cab",
+            "date": "2039-11-01",
+            "amortized": 844.72,
+            "interest": 11.9,
+            "total": 856.62,
+            "pending_capital": 5955.14,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "3f54f81c768e504ce424613d4285fb1f9f39b004",
+            "date": "2039-12-01",
+            "amortized": 846.2,
+            "interest": 10.42,
+            "total": 856.62,
+            "pending_capital": 5108.94,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "cf902f8a1447ce9d81c4ea7fafaf795b68662969",
+            "date": "2040-01-01",
+            "amortized": 847.68,
+            "interest": 8.94,
+            "total": 856.62,
+            "pending_capital": 4261.26,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "8095d7408ee61f525a3c34f58058d2851a4f6458",
+            "date": "2040-02-01",
+            "amortized": 849.16,
+            "interest": 7.46,
+            "total": 856.62,
+            "pending_capital": 3412.1,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "3607a52aca1e2607a44a68c96ac29f69daf74b94",
+            "date": "2040-03-01",
+            "amortized": 850.65,
+            "interest": 5.97,
+            "total": 856.62,
+            "pending_capital": 2561.45,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "8984d6af9a9cdd96f456a1cf304a40583bfead2c",
+            "date": "2040-04-01",
+            "amortized": 852.14,
+            "interest": 4.48,
+            "total": 856.62,
+            "pending_capital": 1709.31,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "e56f00e38710a9e82fc50f457106d583e3bb4a83",
+            "date": "2040-05-01",
+            "amortized": 853.63,
+            "interest": 2.99,
+            "total": 856.62,
+            "pending_capital": 855.68,
+            "operation_type": "receipt_scheduled"
+          },
+          {
+            "uuid": "de92b1d9dbe7017d9f8a3a0c16d3633c3cb7bb21",
+            "date": "2040-06-01",
+            "amortized": 855.68,
+            "interest": 1.5,
+            "total": 857.18,
+            "pending_capital": 0,
+            "operation_type": "receipt_scheduled"
+          }
+        ]
+      }
+    ],
+    "properties": [
+      {
+        "uuid": "b98e6c2e817a5fab2ae52b511bbfb5c63b85eeb9",
+        "code": "5A819F8899B81FDFC6XX",
+        "description": "VIVIENDA CALLE DE LA MAQUINA 1",
+        "purpose": "VIVIENDA HABITUAL",
+        "currency": "EUR",
+        "trading_price": 324694.52,
+        "trading_year": 2026,
+        "historic_prices": [
+          {
+            "date": "2000-01-01",
+            "price": 133200
+          },
+          {
+            "date": "2001-01-01",
+            "price": 138953.8
+          },
+          {
+            "date": "2002-01-01",
+            "price": 141689.44
+          },
+          {
+            "date": "2003-01-01",
+            "price": 148045.14
+          },
+          {
+            "date": "2004-01-01",
+            "price": 156712.1
+          },
+          {
+            "date": "2005-01-01",
+            "price": 160090.79
+          },
+          {
+            "date": "2006-01-01",
+            "price": 167871.63
+          },
+          {
+            "date": "2007-01-01",
+            "price": 176045.96
+          },
+          {
+            "date": "2008-01-01",
+            "price": 184960.89
+          },
+          {
+            "date": "2009-01-01",
+            "price": 190824.96
+          },
+          {
+            "date": "2010-01-01",
+            "price": 194556.23
+          },
+          {
+            "date": "2011-01-01",
+            "price": 201324.19
+          },
+          {
+            "date": "2012-01-01",
+            "price": 205402.71
+          },
+          {
+            "date": "2013-01-01",
+            "price": 215849.58
+          },
+          {
+            "date": "2014-01-01",
+            "price": 220300.3
+          },
+          {
+            "date": "2015-01-01",
+            "price": 225910.54
+          },
+          {
+            "date": "2016-01-01",
+            "price": 232121.8
+          },
+          {
+            "date": "2017-01-01",
+            "price": 240411.18
+          },
+          {
+            "date": "2018-01-01",
+            "price": 244697.52
+          },
+          {
+            "date": "2019-01-01",
+            "price": 256403.85
+          },
+          {
+            "date": "2020-01-01",
+            "price": 264103.9
+          },
+          {
+            "date": "2021-01-01",
+            "price": 266353.97
+          },
+          {
+            "date": "2022-01-01",
+            "price": 283978.12
+          },
+          {
+            "date": "2023-01-01",
+            "price": 297670.44
+          },
+          {
+            "date": "2024-01-01",
+            "price": 309912.29
+          },
+          {
+            "date": "2025-01-01",
+            "price": 319421.91
+          },
+          {
+            "date": "2026-01-01",
+            "price": 324694.52
+          }
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "last_receipt_date": "2026-10-05",
+        "issuer": "ORANGE",
+        "description": "ADEUDO DIGI SPAIN FACTURA 67418764",
+        "account": "ES9899996423311680080297",
+        "status": "paid",
+        "amount": 84.4,
+        "pdf_file": "JVBERi0xLjQKJfbk/N8KMSAwIG9iago8PAovUGFnZXMgMiAwIFIKL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0NvdW50IDEKL0tpZHMgWzMgMCBSXQovVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0NvbnRlbnRzIFs0IDAgUiA1IDAgUiA2IDAgUl0KL0dyb3VwIDw8Ci9DUyAvRGV2aWNlUkdCCi9JIHRydWUKL1MgL1RyYW5zcGFyZW5jeQovVHlwZSAvR3JvdXAKPj4KL01lZGlhQm94IFswIDAgNDQ2LjI1IDYzMS41XQovUGFyZW50IDIgMCBSCi9SZXNvdXJjZXMgNyAwIFIKL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0xlbmd0aCAxMAovRmlsdGVyIC9GbGF0ZURlY29kZQo+PgpzdHJlYW0NCnicK+QCAADuAHwNCmVuZHN0cmVhbQplbmRvYmoKNSAwIG9iago8PAovTGVuZ3RoIDI5Ci9GaWx0ZXIgL0ZsYXRlRGVjb2RlCj4+CnN0cmVhbQ0KeJwzVDAAQl1DIGFmbKhnqpCcy1XIFcgFADVUBI0NCmVuZHN0cmVhbQplbmRvYmoKNiAwIG9iago8PAovTGVuZ3RoIDExMwovRmlsdGVyIC9GbGF0ZURlY29kZQo+PgpzdHJlYW0NCnicXYgxDsIwEAT7fcWWUBD7FGNTR8G0gO4H5giJiIKwxPuBggZNMaM5wQ1VOFS43l5jsfOhY6nw/FILOoXLwuCpV/gm+STCzS/+vZVmF9sUGGL8rFYidcYqj+Vmz4XHPvNitMnmx31ZUyfsFW8FvB+cDQplbmRzdHJlYW0KZW5kb2JqCjcgMCBvYmoKPDwKL0V4dEdTdGF0ZSA4IDAgUgovRm9udCA5IDAgUgo+PgplbmRvYmoKOCAwIG9iago8PAovZ3MxIDEwIDAgUgo+PgplbmRvYmoKOSAwIG9iago8PAovRjEgMTEgMCBSCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRXh0R1N0YXRlCi9jYSAwLjUKPj4KZW5kb2JqCjExIDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagp4cmVmCjAgMTIKMDAwMDAwMDAwMCA2NTUzNSBmDQowMDAwMDAwMDE1IDAwMDAwIG4NCjAwMDAwMDAwNjQgMDAwMDAgbg0KMDAwMDAwMDEyMSAwMDAwMCBuDQowMDAwMDAwMzEwIDAwMDAwIG4NCjAwMDAwMDAzOTMgMDAwMDAgbg0KMDAwMDAwMDQ5NSAwMDAwMCBuDQowMDAwMDAwNjgyIDAwMDAwIG4NCjAwMDAwMDA3MzIgMDAwMDAgbg0KMDAwMDAwMDc2NSAwMDAwMCBuDQowMDAwMDAwNzk3IDAwMDAwIG4NCjAwMDAwMDA4NDQgMDAwMDAgbg0KdHJhaWxlcgo8PAovUm9vdCAxIDAgUgovU2l6ZSAxMgovSUQgWzxBOEMxMzBCRjE0RTg4MkIyREJEQTAwMEM0ODAzRkIwQz4gPEE4QzEzMEJGMTRFODgyQjJEQkRBMDAwQzQ4MDNGQjBDPl0KPj4Kc3RhcnR4cmVmCjk0NwolJUVPRgo=",
+        "pdf_file_settled": true
+      },
+      {
+        "last_receipt_date": "2026-10-12",
+        "issuer": "CANAL ISABEL II",
+        "description": "ADEUDO EMASESA PERIODO 572",
+        "account": "ES9899996423311680080297",
+        "status": "paid",
+        "amount": 58.99,
+        "pdf_file": "JVBERi0xLjQKJfbk/N8KMSAwIG9iago8PAovUGFnZXMgMiAwIFIKL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0NvdW50IDEKL0tpZHMgWzMgMCBSXQovVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0NvbnRlbnRzIFs0IDAgUiA1IDAgUiA2IDAgUl0KL0dyb3VwIDw8Ci9DUyAvRGV2aWNlUkdCCi9JIHRydWUKL1MgL1RyYW5zcGFyZW5jeQovVHlwZSAvR3JvdXAKPj4KL01lZGlhQm94IFswIDAgNDQ2LjI1IDYzMS41XQovUGFyZW50IDIgMCBSCi9SZXNvdXJjZXMgNyAwIFIKL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0xlbmd0aCAxMAovRmlsdGVyIC9GbGF0ZURlY29kZQo+PgpzdHJlYW0NCnicK+QCAADuAHwNCmVuZHN0cmVhbQplbmRvYmoKNSAwIG9iago8PAovTGVuZ3RoIDI5Ci9GaWx0ZXIgL0ZsYXRlRGVjb2RlCj4+CnN0cmVhbQ0KeJwzVDAAQl1DIGFmbKhnqpCcy1XIFcgFADVUBI0NCmVuZHN0cmVhbQplbmRvYmoKNiAwIG9iago8PAovTGVuZ3RoIDExMwovRmlsdGVyIC9GbGF0ZURlY29kZQo+PgpzdHJlYW0NCnicXYgxDsIwEAT7fcWWUBD7FGNTR8G0gO4H5giJiIKwxPuBggZNMaM5wQ1VOFS43l5jsfOhY6nw/FILOoXLwuCpV/gm+STCzS/+vZVmF9sUGGL8rFYidcYqj+Vmz4XHPvNitMnmx31ZUyfsFW8FvB+cDQplbmRzdHJlYW0KZW5kb2JqCjcgMCBvYmoKPDwKL0V4dEdTdGF0ZSA4IDAgUgovRm9udCA5IDAgUgo+PgplbmRvYmoKOCAwIG9iago8PAovZ3MxIDEwIDAgUgo+PgplbmRvYmoKOSAwIG9iago8PAovRjEgMTEgMCBSCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRXh0R1N0YXRlCi9jYSAwLjUKPj4KZW5kb2JqCjExIDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagp4cmVmCjAgMTIKMDAwMDAwMDAwMCA2NTUzNSBmDQowMDAwMDAwMDE1IDAwMDAwIG4NCjAwMDAwMDAwNjQgMDAwMDAgbg0KMDAwMDAwMDEyMSAwMDAwMCBuDQowMDAwMDAwMzEwIDAwMDAwIG4NCjAwMDAwMDAzOTMgMDAwMDAgbg0KMDAwMDAwMDQ5NSAwMDAwMCBuDQowMDAwMDAwNjgyIDAwMDAwIG4NCjAwMDAwMDA3MzIgMDAwMDAgbg0KMDAwMDAwMDc2NSAwMDAwMCBuDQowMDAwMDAwNzk3IDAwMDAwIG4NCjAwMDAwMDA4NDQgMDAwMDAgbg0KdHJhaWxlcgo8PAovUm9vdCAxIDAgUgovU2l6ZSAxMgovSUQgWzxBOEMxMzBCRjE0RTg4MkIyREJEQTAwMEM0ODAzRkIwQz4gPEE4QzEzMEJGMTRFODgyQjJEQkRBMDAwQzQ4MDNGQjBDPl0KPj4Kc3RhcnR4cmVmCjk0NwolJUVPRgo=",
+        "pdf_file_settled": true
+      },
+      {
+        "last_receipt_date": "2026-10-02",
+        "issuer": "GIMNASIO FITMACHINE",
+        "description": "RECIBO ALTAFIT CUOTA 592",
+        "account": "ES9899996423311680080297",
+        "status": "paid",
+        "amount": 33.84,
+        "pdf_file": "JVBERi0xLjQKJfbk/N8KMSAwIG9iago8PAovUGFnZXMgMiAwIFIKL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0NvdW50IDEKL0tpZHMgWzMgMCBSXQovVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0NvbnRlbnRzIFs0IDAgUiA1IDAgUiA2IDAgUl0KL0dyb3VwIDw8Ci9DUyAvRGV2aWNlUkdCCi9JIHRydWUKL1MgL1RyYW5zcGFyZW5jeQovVHlwZSAvR3JvdXAKPj4KL01lZGlhQm94IFswIDAgNDQ2LjI1IDYzMS41XQovUGFyZW50IDIgMCBSCi9SZXNvdXJjZXMgNyAwIFIKL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0xlbmd0aCAxMAovRmlsdGVyIC9GbGF0ZURlY29kZQo+PgpzdHJlYW0NCnicK+QCAADuAHwNCmVuZHN0cmVhbQplbmRvYmoKNSAwIG9iago8PAovTGVuZ3RoIDI5Ci9GaWx0ZXIgL0ZsYXRlRGVjb2RlCj4+CnN0cmVhbQ0KeJwzVDAAQl1DIGFmbKhnqpCcy1XIFcgFADVUBI0NCmVuZHN0cmVhbQplbmRvYmoKNiAwIG9iago8PAovTGVuZ3RoIDExMwovRmlsdGVyIC9GbGF0ZURlY29kZQo+PgpzdHJlYW0NCnicXYgxDsIwEAT7fcWWUBD7FGNTR8G0gO4H5giJiIKwxPuBggZNMaM5wQ1VOFS43l5jsfOhY6nw/FILOoXLwuCpV/gm+STCzS/+vZVmF9sUGGL8rFYidcYqj+Vmz4XHPvNitMnmx31ZUyfsFW8FvB+cDQplbmRzdHJlYW0KZW5kb2JqCjcgMCBvYmoKPDwKL0V4dEdTdGF0ZSA4IDAgUgovRm9udCA5IDAgUgo+PgplbmRvYmoKOCAwIG9iago8PAovZ3MxIDEwIDAgUgo+PgplbmRvYmoKOSAwIG9iago8PAovRjEgMTEgMCBSCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRXh0R1N0YXRlCi9jYSAwLjUKPj4KZW5kb2JqCjExIDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagp4cmVmCjAgMTIKMDAwMDAwMDAwMCA2NTUzNSBmDQowMDAwMDAwMDE1IDAwMDAwIG4NCjAwMDAwMDAwNjQgMDAwMDAgbg0KMDAwMDAwMDEyMSAwMDAwMCBuDQowMDAwMDAwMzEwIDAwMDAwIG4NCjAwMDAwMDAzOTMgMDAwMDAgbg0KMDAwMDAwMDQ5NSAwMDAwMCBuDQowMDAwMDAwNjgyIDAwMDAwIG4NCjAwMDAwMDA3MzIgMDAwMDAgbg0KMDAwMDAwMDc2NSAwMDAwMCBuDQowMDAwMDAwNzk3IDAwMDAwIG4NCjAwMDAwMDA4NDQgMDAwMDAgbg0KdHJhaWxlcgo8PAovUm9vdCAxIDAgUgovU2l6ZSAxMgovSUQgWzxBOEMxMzBCRjE0RTg4MkIyREJEQTAwMEM0ODAzRkIwQz4gPEE4QzEzMEJGMTRFODgyQjJEQkRBMDAwQzQ4MDNGQjBDPl0KPj4Kc3RhcnR4cmVmCjk0NwolJUVPRgo=",
+        "pdf_file_settled": true
+      },
+      {
+        "last_receipt_date": "2026-09-15",
+        "issuer": "ENDESA GAS",
+        "description": "RECIBO NATURGY GAS REF 15435712",
+        "account": "ES9899996423311680080297",
+        "status": "paid",
+        "amount": 73.37,
+        "pdf_file": "JVBERi0xLjQKJfbk/N8KMSAwIG9iago8PAovUGFnZXMgMiAwIFIKL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL0NvdW50IDEKL0tpZHMgWzMgMCBSXQovVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0NvbnRlbnRzIFs0IDAgUiA1IDAgUiA2IDAgUl0KL0dyb3VwIDw8Ci9DUyAvRGV2aWNlUkdCCi9JIHRydWUKL1MgL1RyYW5zcGFyZW5jeQovVHlwZSAvR3JvdXAKPj4KL01lZGlhQm94IFswIDAgNDQ2LjI1IDYzMS41XQovUGFyZW50IDIgMCBSCi9SZXNvdXJjZXMgNyAwIFIKL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0xlbmd0aCAxMAovRmlsdGVyIC9GbGF0ZURlY29kZQo+PgpzdHJlYW0NCnicK+QCAADuAHwNCmVuZHN0cmVhbQplbmRvYmoKNSAwIG9iago8PAovTGVuZ3RoIDI5Ci9GaWx0ZXIgL0ZsYXRlRGVjb2RlCj4+CnN0cmVhbQ0KeJwzVDAAQl1DIGFmbKhnqpCcy1XIFcgFADVUBI0NCmVuZHN0cmVhbQplbmRvYmoKNiAwIG9iago8PAovTGVuZ3RoIDExMwovRmlsdGVyIC9GbGF0ZURlY29kZQo+PgpzdHJlYW0NCnicXYgxDsIwEAT7fcWWUBD7FGNTR8G0gO4H5giJiIKwxPuBggZNMaM5wQ1VOFS43l5jsfOhY6nw/FILOoXLwuCpV/gm+STCzS/+vZVmF9sUGGL8rFYidcYqj+Vmz4XHPvNitMnmx31ZUyfsFW8FvB+cDQplbmRzdHJlYW0KZW5kb2JqCjcgMCBvYmoKPDwKL0V4dEdTdGF0ZSA4IDAgUgovRm9udCA5IDAgUgo+PgplbmRvYmoKOCAwIG9iago8PAovZ3MxIDEwIDAgUgo+PgplbmRvYmoKOSAwIG9iago8PAovRjEgMTEgMCBSCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRXh0R1N0YXRlCi9jYSAwLjUKPj4KZW5kb2JqCjExIDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagp4cmVmCjAgMTIKMDAwMDAwMDAwMCA2NTUzNSBmDQowMDAwMDAwMDE1IDAwMDAwIG4NCjAwMDAwMDAwNjQgMDAwMDAgbg0KMDAwMDAwMDEyMSAwMDAwMCBuDQowMDAwMDAwMzEwIDAwMDAwIG4NCjAwMDAwMDAzOTMgMDAwMDAgbg0KMDAwMDAwMDQ5NSAwMDAwMCBuDQowMDAwMDAwNjgyIDAwMDAwIG4NCjAwMDAwMDA3MzIgMDAwMDAgbg0KMDAwMDAwMDc2NSAwMDAwMCBuDQowMDAwMDAwNzk3IDAwMDAwIG4NCjAwMDAwMDA4NDQgMDAwMDAgbg0KdHJhaWxlcgo8PAovUm9vdCAxIDAgUgovU2l6ZSAxMgovSUQgWzxBOEMxMzBCRjE0RTg4MkIyREJEQTAwMEM0ODAzRkIwQz4gPEE4QzEzMEJGMTRFODgyQjJEQkRBMDAwQzQ4MDNGQjBDPl0KPj4Kc3RhcnR4cmVmCjk0NwolJUVPRgo=",
+        "pdf_file_settled": true
+      }
+    ],
+    "leases": [
+      {
+        "subtype": "renting",
+        "uuid": "ba0be82f528d3af9e3dffba84e3ed28c20dad11f",
+        "contract_number": "L-2023-178622",
+        "name": "RENTING TURISMO",
+        "provider": {
+          "name": "MACHINE RENTING, S.A.",
+          "tax_id": "B79318242"
+        },
+        "currency": "EUR",
+        "start_date": "2023-05-01",
+        "end_date": "2027-04-30",
+        "term_months": 48,
+        "payment_frequency": "monthly",
+        "status": "active",
+        "linked_account": "ES9899996423311680080297",
+        "holders": [
+          {
+            "ID": "05249217L",
+            "name": "ANTONIO MACHINE",
+            "role": "owner"
+          }
+        ],
+        "asset": {
+          "year": 2023,
+          "brand": "MACHINE MOTOR",
+          "model": "M3 COMPACT",
+          "category": "vehicle",
+          "description": "TURISMO COMPACTO",
+          "license_plate": "0000MCH"
+        },
+        "financials": {
+          "apr_tae": null,
+          "initial_fee": 427.35,
+          "vat_included": false,
+          "residual_value": null,
+          "purchase_option": false,
+          "capital_financed": null,
+          "security_deposit": 854.7,
+          "early_termination": {
+            "allowed": true,
+            "penalty_type": "percentage_of_remaining",
+            "penalty_value": 50
+          },
+          "services_included": {
+            "tires": false,
+            "insurance": true,
+            "maintenance": true,
+            "roadside_assistance": true
+          },
+          "mileage_limit_year": 20000,
+          "nominal_interest_rate": null
+        },
+        "totals": {
+          "paid_installments": 42,
+          "remaining_installments": 6,
+          "total_paid": 17948.7,
+          "total_pending": 2564.1,
+          "principal_outstanding": 1999.98,
+          "accrued_interest": 2153.76
+        },
+        "installments": {
+          "paid": [
+            {
+              "uuid": "1f2faa4b5171418f1b99ecd6f1230b28f1b237d6",
+              "date": "2026-08-01",
+              "currency": "EUR",
+              "total": 427.35,
+              "breakdown": {
+                "fees": 0,
+                "taxes": 0,
+                "interest": 51.28,
+                "services": 42.74,
+                "principal": 333.33
+              },
+              "value_date": "2026-08-01",
+              "status": "paid"
+            },
+            {
+              "uuid": "d3853bd976e1fe58d36127b4a58eaa2071a356e7",
+              "date": "2026-09-01",
+              "currency": "EUR",
+              "total": 427.35,
+              "breakdown": {
+                "fees": 0,
+                "taxes": 0,
+                "interest": 51.28,
+                "services": 42.74,
+                "principal": 333.33
+              },
+              "value_date": "2026-09-01",
+              "status": "paid"
+            },
+            {
+              "uuid": "560c29e30ff960830659abca2f06541b80312c83",
+              "date": "2026-10-01",
+              "currency": "EUR",
+              "total": 427.35,
+              "breakdown": {
+                "fees": 0,
+                "taxes": 0,
+                "interest": 51.28,
+                "services": 42.74,
+                "principal": 333.33
+              },
+              "value_date": "2026-10-01",
+              "status": "paid"
+            }
+          ],
+          "scheduled": [
+            {
+              "uuid": "7c0cec683144ea16c11f70c6f29789555332eb85",
+              "date": "2026-11-01",
+              "currency": "EUR",
+              "total": 427.35,
+              "breakdown": {
+                "fees": 0,
+                "taxes": 0,
+                "interest": 51.28,
+                "services": 42.74,
+                "principal": 333.33
+              },
+              "value_date": "2026-11-01",
+              "status": "pending"
+            },
+            {
+              "uuid": "fc6bad7368ca70f1559852a0e5c3f0199ba55e34",
+              "date": "2026-12-01",
+              "currency": "EUR",
+              "total": 427.35,
+              "breakdown": {
+                "fees": 0,
+                "taxes": 0,
+                "interest": 51.28,
+                "services": 42.74,
+                "principal": 333.33
+              },
+              "value_date": "2026-12-01",
+              "status": "pending"
+            },
+            {
+              "uuid": "5ba1ebb128189dde975250a666c4e6cea8f21447",
+              "date": "2027-01-01",
+              "currency": "EUR",
+              "total": 427.35,
+              "breakdown": {
+                "fees": 0,
+                "taxes": 0,
+                "interest": 51.28,
+                "services": 42.74,
+                "principal": 333.33
+              },
+              "value_date": "2027-01-01",
+              "status": "pending"
+            },
+            {
+              "uuid": "11cd65361b251ae0b7d02064b047f838a9623566",
+              "date": "2027-02-01",
+              "currency": "EUR",
+              "total": 427.35,
+              "breakdown": {
+                "fees": 0,
+                "taxes": 0,
+                "interest": 51.28,
+                "services": 42.74,
+                "principal": 333.33
+              },
+              "value_date": "2027-02-01",
+              "status": "pending"
+            },
+            {
+              "uuid": "545476f92c2fb32af374186b6041bc0c08b62df1",
+              "date": "2027-03-01",
+              "currency": "EUR",
+              "total": 427.35,
+              "breakdown": {
+                "fees": 0,
+                "taxes": 0,
+                "interest": 51.28,
+                "services": 42.74,
+                "principal": 333.33
+              },
+              "value_date": "2027-03-01",
+              "status": "pending"
+            },
+            {
+              "uuid": "bbf4dfed850df7c7a0d0748ab9d9998edd99f663",
+              "date": "2027-04-01",
+              "currency": "EUR",
+              "total": 427.35,
+              "breakdown": {
+                "fees": 0,
+                "taxes": 0,
+                "interest": 51.28,
+                "services": 42.74,
+                "principal": 333.33
+              },
+              "value_date": "2027-04-01",
+              "status": "pending"
+            }
+          ]
+        }
+      }
+    ],
+    "deposits": [
+      {
+        "uuid": "09553167de330a8dd62f01c5c754c7b0a9db6796",
+        "code": "DPZ-9AD8F2E9AD",
+        "name": "DEPOSITO 12 MESES",
+        "currency": "EUR",
+        "principal": 11100,
+        "pending_principal": 11100,
+        "start_date": "2023-09-15",
+        "maturity_date": "2027-09-15",
+        "payment_frequency": "at_maturity",
+        "capitalization": "none",
+        "rate_type": "fixed",
+        "nominal_interest_rate": 2.32,
+        "linked_account": "ES9899996423311680080297",
+        "accrued_interest": 28.96,
+        "expected_interest_total": 257.52,
+        "withholding_tax_rate": 19,
+        "status": "active",
+        "auto_renewal": {
+          "enabled": true,
+          "renewed_times": 3,
+          "next_renewal_date": "2027-09-15",
+          "renewal_term_months": 12
+        },
+        "early_withdrawal": {
+          "notes": "Perdida de intereses devengados del periodo en curso",
+          "allowed": true,
+          "penalty_type": "interest_loss",
+          "penalty_value": 100
+        },
+        "owners": [
+          {
+            "ID": "05249217L",
+            "name": "ANTONIO MACHINE",
+            "role": "owner"
+          }
+        ],
+        "interest_movements": [
+          {
+            "uuid": "e389c47c20bc39e4fa6cfe136b49b03b8c1f93c8",
+            "scheduled": false,
+            "date": "2024-09-15",
+            "period_start": "2023-09-15",
+            "period_end": "2024-09-15",
+            "currency": "EUR",
+            "gross_interest": 344.1,
+            "withholding_tax": 65.38,
+            "net_interest": 278.72,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "3f4c14bf190b89d4879394b350c78519526fe1fb",
+            "scheduled": false,
+            "date": "2025-09-15",
+            "period_start": "2024-09-15",
+            "period_end": "2025-09-15",
+            "currency": "EUR",
+            "gross_interest": 306.36,
+            "withholding_tax": 58.21,
+            "net_interest": 248.15,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "5daf4d4c7c6daeaee42ecdd1266134482c41b76c",
+            "scheduled": false,
+            "date": "2026-09-15",
+            "period_start": "2025-09-15",
+            "period_end": "2026-09-15",
+            "currency": "EUR",
+            "gross_interest": 227.55,
+            "withholding_tax": 43.23,
+            "net_interest": 184.32,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "8957a6a882e4a520e8c7f63f78bac558d875a789",
+            "scheduled": true,
+            "date": "2027-09-15",
+            "period_start": "2026-09-15",
+            "period_end": "2027-09-15",
+            "currency": "EUR",
+            "gross_interest": 257.52,
+            "withholding_tax": 48.93,
+            "net_interest": 208.59,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "4efb16278fdac7282463a5dfa3a393e3c1268209",
+            "scheduled": true,
+            "date": "2028-09-15",
+            "period_start": "2027-09-15",
+            "period_end": "2028-09-15",
+            "currency": "EUR",
+            "gross_interest": 310.8,
+            "withholding_tax": 59.05,
+            "net_interest": 251.75,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "9839eed01f039785bd0e4e46561359c5a5e890e3",
+            "scheduled": true,
+            "date": "2029-09-15",
+            "period_start": "2028-09-15",
+            "period_end": "2029-09-15",
+            "currency": "EUR",
+            "gross_interest": 301.92,
+            "withholding_tax": 57.36,
+            "net_interest": 244.56,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "56e5d96f369325b805ee41041396be0ae86935c6",
+            "scheduled": true,
+            "date": "2030-09-15",
+            "period_start": "2029-09-15",
+            "period_end": "2030-09-15",
+            "currency": "EUR",
+            "gross_interest": 223.11,
+            "withholding_tax": 42.39,
+            "net_interest": 180.72,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "647f94e4aeb9f80293dc6a25731d9db2802131fb",
+            "scheduled": true,
+            "date": "2031-09-15",
+            "period_start": "2030-09-15",
+            "period_end": "2031-09-15",
+            "currency": "EUR",
+            "gross_interest": 364.08,
+            "withholding_tax": 69.18,
+            "net_interest": 294.9,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "82fd9485270bec78827362de7289d375e70b9695",
+            "scheduled": true,
+            "date": "2032-09-15",
+            "period_start": "2031-09-15",
+            "period_end": "2032-09-15",
+            "currency": "EUR",
+            "gross_interest": 359.64,
+            "withholding_tax": 68.33,
+            "net_interest": 291.31,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "c4a4fceb6c551c632d3f875b79bbb130d9228b12",
+            "scheduled": true,
+            "date": "2033-09-15",
+            "period_start": "2032-09-15",
+            "period_end": "2033-09-15",
+            "currency": "EUR",
+            "gross_interest": 346.32,
+            "withholding_tax": 65.8,
+            "net_interest": 280.52,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "5f81179a389185be223807978d127089fdf11949",
+            "scheduled": true,
+            "date": "2034-09-15",
+            "period_start": "2033-09-15",
+            "period_end": "2034-09-15",
+            "currency": "EUR",
+            "gross_interest": 225.33,
+            "withholding_tax": 42.81,
+            "net_interest": 182.52,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "6d53020a4c1f4e86563fbb5ec758fb8e7df63a4b",
+            "scheduled": true,
+            "date": "2035-09-15",
+            "period_start": "2034-09-15",
+            "period_end": "2035-09-15",
+            "currency": "EUR",
+            "gross_interest": 350.76,
+            "withholding_tax": 66.64,
+            "net_interest": 284.12,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "e61ea056433a803c47c1293899958f9dc6972b90",
+            "scheduled": true,
+            "date": "2036-09-15",
+            "period_start": "2035-09-15",
+            "period_end": "2036-09-15",
+            "currency": "EUR",
+            "gross_interest": 248.64,
+            "withholding_tax": 47.24,
+            "net_interest": 201.4,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "396f63a6e59f7deea3b86c227f37b2cc6311ebb5",
+            "scheduled": true,
+            "date": "2037-09-15",
+            "period_start": "2036-09-15",
+            "period_end": "2037-09-15",
+            "currency": "EUR",
+            "gross_interest": 326.34,
+            "withholding_tax": 62,
+            "net_interest": 264.34,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "fb8a0d6646c6d8481f1a4e441afd562f8228563d",
+            "scheduled": true,
+            "date": "2038-09-15",
+            "period_start": "2037-09-15",
+            "period_end": "2038-09-15",
+            "currency": "EUR",
+            "gross_interest": 311.91,
+            "withholding_tax": 59.26,
+            "net_interest": 252.65,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "09d4733be29c1d61cec0d7d0364a6ba694625409",
+            "scheduled": true,
+            "date": "2039-09-15",
+            "period_start": "2038-09-15",
+            "period_end": "2039-09-15",
+            "currency": "EUR",
+            "gross_interest": 259.74,
+            "withholding_tax": 49.35,
+            "net_interest": 210.39,
+            "payment_type": "maturity"
+          },
+          {
+            "uuid": "b14e0f5682f58714879f12bae894402b4c33a583",
+            "scheduled": true,
+            "date": "2040-09-15",
+            "period_start": "2039-09-15",
+            "period_end": "2040-09-15",
+            "currency": "EUR",
+            "gross_interest": 279.72,
+            "withholding_tax": 53.15,
+            "net_interest": 226.57,
+            "payment_type": "maturity"
+          }
+        ],
+        "principal_movements": [
+          {
+            "uuid": "aed52e71da5f9077820fd2f929bf63bd91dd713c",
+            "date": "2023-09-15",
+            "type": "opening",
+            "amount": 11100,
+            "currency": "EUR"
+          },
+          {
+            "uuid": "42d4356d2e63d89edf8466d03f6278973c616430",
+            "date": "2024-09-15",
+            "type": "renewal",
+            "amount": 11100,
+            "currency": "EUR"
+          },
+          {
+            "uuid": "ba8a342ad3ed69a114114f0d7acd24f4e12bf8c0",
+            "date": "2025-09-15",
+            "type": "renewal",
+            "amount": 11100,
+            "currency": "EUR"
+          },
+          {
+            "uuid": "604386c90553ddac6002808a4dd796ddc9416a40",
+            "date": "2026-09-15",
+            "type": "renewal",
+            "amount": 11100,
+            "currency": "EUR"
+          }
+        ]
+      }
+    ]
+  },
+  "statistics": {
+    "code": "bbva",
+    "execution_time": 0.06117606163024902,
+    "operation_id": "nbk7dax3xnarxjk7jzn6he",
+    "warnings": [],
+    "SESSION": "3136adf863f73944",
+    "token": "MOCKYf4z"
+  }
+}

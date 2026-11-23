@@ -142,3 +142,46 @@ class InsightTone(StrEnum):
     CONCISE = "CONCISE"
     BALANCED = "BALANCED"
     DETAILED = "DETAILED"
+
+
+class AggregatorConnectionStatus(StrEnum):
+    PENDING_OTP = "PENDING_OTP"
+    ACTIVE = "ACTIVE"
+    FAILED = "FAILED"
+
+
+class AgentKey(StrEnum):
+    INVESTMENT = "INVESTMENT"
+    TAX = "TAX"
+    INSURANCE = "INSURANCE"
+    LOAN = "LOAN"
+    BUDGET = "BUDGET"
+    RSU = "RSU"
+    ESTATE = "ESTATE"
+    GOAL = "GOAL"
+    CHIEF = "CHIEF"
+
+
+class AgentStatus(StrEnum):
+    PENDING = "PENDING"    # never run
+    RUNNING = "RUNNING"
+    READY = "READY"
+    FAILED = "FAILED"
+
+
+class AnalysisRunStatus(StrEnum):
+    RUNNING = "RUNNING"
+    COMPLETED = "COMPLETED"
+    FAILED = "FAILED"
+
+
+class RecommendationStatus(StrEnum):
+    OPEN = "OPEN"
+    IN_PROGRESS = "IN_PROGRESS"
+    DONE = "DONE"
+    DISMISSED = "DISMISSED"
+
+
+class ChatRole(StrEnum):
+    USER = "user"
+    ASSISTANT = "assistant"
