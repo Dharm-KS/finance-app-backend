@@ -123,6 +123,14 @@ const PAYLOAD = __PAYLOAD__;
 (() => {
   const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
   async function decrypt(password) {
+    if (!window.crypto?.subtle) {
+      // Browsers only allow this crypto on HTTPS/localhost; on a plain-HTTP server, the server decrypts.
+      const res = await fetch("/api-docs/unlock", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }) });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(json.message || "Wrong password");
+      return json.data.html;
+    }
     const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
     const key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt: b64(PAYLOAD.salt), iterations: PAYLOAD.iter, hash: "SHA-256" },
       base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
@@ -157,7 +165,7 @@ const PAYLOAD = __PAYLOAD__;
     const pw = document.getElementById("pw").value, btn = document.getElementById("unlock"), msg = document.getElementById("gate-msg");
     btn.disabled = true; msg.textContent = "";
     try { open(await decrypt(pw)); try { sessionStorage.setItem("fa_docs_pw", pw); } catch {} }
-    catch { msg.textContent = "Wrong password. Check it and try again."; }
+    catch (err) { msg.textContent = /too many/i.test(err?.message || "") ? err.message : "Wrong password. Check it and try again."; }
     finally { btn.disabled = false; }
   });
   let saved = null; try { saved = sessionStorage.getItem("fa_docs_pw"); } catch {}

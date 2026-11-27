@@ -3,9 +3,10 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, RedirectResponse
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
+from app.api import docs_page
 from app.api.router import api_router
 from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
@@ -49,12 +50,7 @@ def create_app() -> FastAPI:
     app.mount("/app", StaticFiles(directory=Path(__file__).parent / "static" / "app", html=True), name="web-app")
 
     # Password-protected API docs for the team (content is encrypted; see docs/api_page/build.py).
-    api_docs_page = Path(__file__).parent / "static" / "api-docs" / "index.html"
-
-    @app.get("/api-docs", include_in_schema=False)
-    @app.get("/api-docs/", include_in_schema=False)
-    async def api_docs():
-        return FileResponse(api_docs_page, media_type="text/html", headers={"Cache-Control": "no-cache"})
+    app.include_router(docs_page.router)
 
     @app.get("/", include_in_schema=False)
     async def root():

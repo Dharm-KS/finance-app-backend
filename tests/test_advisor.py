@@ -387,3 +387,16 @@ async def test_api_docs_page_is_served_encrypted(client):
     assert r.status_code == 200 and r.headers["content-type"].startswith("text/html")
     assert "const PAYLOAD" in r.text and "Open docs" in r.text
     assert "client_secret" not in r.text and "/auth/token" not in r.text  # docs only readable with the password
+
+
+async def test_api_docs_unlock_on_plain_http(client):
+    from app.api import docs_page
+
+    docs_page._failures.clear()
+    r = await client.post("/api-docs/unlock", json={"password": "wrong"})
+    assert r.status_code == 401
+    for _ in range(docs_page.MAX_FAILURES):
+        await client.post("/api-docs/unlock", json={"password": "wrong"})
+    r = await client.post("/api-docs/unlock", json={"password": "wrong"})
+    assert r.status_code == 429  # brute force is rate limited
+    docs_page._failures.clear()
