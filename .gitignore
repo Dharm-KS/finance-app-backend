@@ -4,3 +4,7 @@ __pycache__/
 .env
 .pytest_cache/
 *.db
+
+# API docs page source (contains the prod client secret in plain text; only the encrypted page is committed)
+docs/api_page/content.html
+docs/api_page/artifact.html

@@ -380,3 +380,10 @@ def test_preview_steps_merge_finished_agents():
     assert [s["key"] for s in steps] == ["diversify-single-stock", "deploy-idle-cash"]  # HIGH impact first
     assert sorted(steps[0]["agents"]) == ["INVESTMENT", "RSU"]  # same action from two agents, shown once
     assert _progress(states) == {"completed": 2, "total": 9}
+
+
+async def test_api_docs_page_is_served_encrypted(client):
+    r = await client.get("/api-docs")
+    assert r.status_code == 200 and r.headers["content-type"].startswith("text/html")
+    assert "const PAYLOAD" in r.text and "Open docs" in r.text
+    assert "client_secret" not in r.text and "/auth/token" not in r.text  # docs only readable with the password
