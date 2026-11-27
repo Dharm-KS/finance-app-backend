@@ -4,6 +4,7 @@ from app.api.deps import CurrentUser, DbSession
 from app.schemas.common import AUTH_ERRORS, NOT_FOUND, VALIDATION, ApiResponse, ok
 from app.schemas.goal import GoalCreate, GoalListOut, GoalOut, GoalSelectionIn, GoalSuggestionOut, GoalUpdate
 from app.services import goal_service
+from app.services.advisor import engine
 
 router = APIRouter(prefix="/goals", tags=["Goals"])
 
@@ -43,7 +44,9 @@ async def goal_suggestions(user: CurrentUser, db: DbSession):
     responses={**AUTH_ERRORS, **VALIDATION},
 )
 async def create_goal(payload: GoalCreate, user: CurrentUser, db: DbSession):
-    return ok(await goal_service.create(db, user, payload), "Goal created successfully")
+    out = await goal_service.create(db, user, payload)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
+    return ok(out, "Goal created successfully")
 
 
 @router.put(
@@ -56,7 +59,9 @@ async def create_goal(payload: GoalCreate, user: CurrentUser, db: DbSession):
     responses={**AUTH_ERRORS, **VALIDATION},
 )
 async def save_goal_selection(payload: GoalSelectionIn, user: CurrentUser, db: DbSession):
-    return ok({"goals": await goal_service.save_selection(db, user, payload)}, "Goals saved successfully")
+    goals = await goal_service.save_selection(db, user, payload)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
+    return ok({"goals": goals}, "Goals saved successfully")
 
 
 @router.put(
@@ -67,7 +72,9 @@ async def save_goal_selection(payload: GoalSelectionIn, user: CurrentUser, db: D
     responses={**AUTH_ERRORS, **NOT_FOUND, **VALIDATION},
 )
 async def update_goal(payload: GoalUpdate, user: CurrentUser, db: DbSession, goal_id: int = GoalId):
-    return ok(await goal_service.update(db, user, goal_id, payload), "Goal updated successfully")
+    out = await goal_service.update(db, user, goal_id, payload)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
+    return ok(out, "Goal updated successfully")
 
 
 @router.delete(
@@ -78,4 +85,5 @@ async def update_goal(payload: GoalUpdate, user: CurrentUser, db: DbSession, goa
 )
 async def delete_goal(user: CurrentUser, db: DbSession, goal_id: int = GoalId):
     await goal_service.delete(db, user, goal_id)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
     return ok(None, "Goal deleted successfully")

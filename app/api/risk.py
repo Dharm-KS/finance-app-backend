@@ -4,6 +4,7 @@ from app.api.deps import CurrentUser, DbSession
 from app.schemas.common import AUTH_ERRORS, NOT_FOUND, VALIDATION, ApiResponse, ok
 from app.schemas.risk import RiskProfileIn, RiskProfileOut
 from app.services import risk_service
+from app.services.advisor import engine
 
 router = APIRouter(prefix="/risk-profile", tags=["Risk profile"])
 
@@ -30,4 +31,5 @@ async def get_risk_profile(user: CurrentUser, db: DbSession):
 )
 async def put_risk_profile(payload: RiskProfileIn, user: CurrentUser, db: DbSession):
     profile = await risk_service.upsert(db, user, payload)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
     return ok(RiskProfileOut.model_validate(profile), "Risk profile saved successfully")

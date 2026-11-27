@@ -86,6 +86,9 @@ async def test_onboarding_status_progression(client):
         assert r.status_code == 200
         return r.json()["data"]["current_step"]
 
+    assert await step() == "BANK_CONNECT"
+    r = await client.post(f"{API}/onboarding/skip", json={"step": "BANK_CONNECT"}, headers=h)
+    assert r.json()["data"]["bank_skipped"] is True
     assert await step() == "FINANCIAL_PROFILE"
     await client.put(f"{API}/financial-profile", json=FINANCIAL_PROFILE, headers=h)
     assert await step() == "EQUITY"
@@ -118,6 +121,7 @@ async def test_dashboard(client):
     h = await register_headers(client, "9876543210")
     await give_credit_consent(client, h)
     await client.post(f"{API}/credit/fetch", headers=h)
+    await client.post(f"{API}/onboarding/skip", json={"step": "BANK_CONNECT"}, headers=h)
     await _full_profile(client, h)
     await client.post(f"{API}/goals", json={"goal_type": "EMERGENCY_FUND"}, headers=h)
     await client.post(f"{API}/goals", json={"goal_type": "REDUCE_SINGLE_STOCK_CONCENTRATION"}, headers=h)
@@ -149,7 +153,7 @@ async def test_dashboard_with_no_data(client):
     d = r.json()["data"]
     assert d["net_worth"] == 0
     assert d["risk"] is None
-    assert d["onboarding_step"] == "FINANCIAL_PROFILE"
+    assert d["onboarding_step"] == "BANK_CONNECT"
 
 
 async def test_goal_priority_defaults_per_type(client):

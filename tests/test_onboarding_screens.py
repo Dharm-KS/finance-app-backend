@@ -204,6 +204,8 @@ async def test_calibration_journey_and_resume(client):
     async def step():
         return (await client.get(f"{API}/onboarding/status", headers=h)).json()["data"]["current_step"]
 
+    assert await step() == "BANK_CONNECT"
+    await client.post(f"{API}/onboarding/skip", json={"step": "BANK_CONNECT"}, headers=h)
     assert await step() == "FINANCIAL_PROFILE"
     await client.put(f"{API}/financial-profile", json=MONEY, headers=h)
     assert await step() == "EQUITY"

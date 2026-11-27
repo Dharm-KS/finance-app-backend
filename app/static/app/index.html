@@ -40,6 +40,12 @@
     </section>
   </main>
 
+  <!-- ===== Onboarding (after OTP sign-in, before the plan) ===== -->
+  <main id="onboard-view" class="view narrow hidden">
+    <div class="stepper" id="ob-stepper"></div>
+    <section class="card" id="ob-card"></section>
+  </main>
+
   <!-- ===== App ===== -->
   <main id="app-view" class="view hidden">
     <nav class="tabs" role="tablist">
@@ -52,15 +58,25 @@
     <!-- Plan -->
     <section id="tab-plan" class="tab-panel">
       <div id="connect-empty" class="card empty hidden">
-        <h2>Connect your accounts</h2>
-        <p class="muted">Your twin reads your bank accounts, investments, loans and property, then 8 specialist agents and the Chief agent build your plan.</p>
-        <button class="btn primary connect-btn">Connect bank accounts</button>
+        <h2>No plan yet</h2>
+        <p class="muted">8 specialist agents and the Chief agent build your plan from your bank data and your onboarding answers.</p>
+        <div class="row">
+          <button id="run-analysis-btn" class="btn primary">Build my plan</button>
+          <button class="btn ghost connect-btn">Connect bank accounts</button>
+        </div>
       </div>
 
       <div id="progress-card" class="card hidden">
         <h2>Analysing your finances…</h2>
-        <p class="muted">Each specialist agent reviews its area, then the Chief agent combines them into one plan.</p>
+        <p class="muted">Each specialist agent reviews your bank data and your answers, then the Chief agent combines them into one plan.</p>
+        <div class="bar"><div id="progress-fill" class="bar-fill"></div></div>
+        <p id="progress-text" class="muted small"></p>
         <div id="progress-agents" class="chips"></div>
+      </div>
+
+      <div id="preview-wrap" class="hidden">
+        <h2 class="section-title">Early suggestions <span class="muted small">· your final step-by-step plan is on its way</span></h2>
+        <ol id="preview-steps" class="steps"></ol>
       </div>
 
       <div id="plan-content" class="hidden">

@@ -4,6 +4,7 @@ from app.api.deps import CurrentUser, DbSession
 from app.schemas.common import AUTH_ERRORS, VALIDATION, ApiResponse, ok
 from app.schemas.financial import FinancialProfileIn, FinancialProfileOut
 from app.services import financial_service
+from app.services.advisor import engine
 
 router = APIRouter(prefix="/financial-profile", tags=["Financial profile"])
 
@@ -28,4 +29,6 @@ async def get_financial_profile(user: CurrentUser, db: DbSession):
     responses={**AUTH_ERRORS, **VALIDATION},
 )
 async def put_financial_profile(payload: FinancialProfileIn, user: CurrentUser, db: DbSession):
-    return ok(await financial_service.upsert_profile(db, user, payload), "Financial profile saved successfully")
+    out = await financial_service.upsert_profile(db, user, payload)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
+    return ok(out, "Financial profile saved successfully")

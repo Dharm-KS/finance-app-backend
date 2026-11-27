@@ -4,6 +4,7 @@ from app.api.deps import CurrentUser, DbSession
 from app.schemas.common import AUTH_ERRORS, VALIDATION, ApiResponse, ok
 from app.schemas.preferences import PreferencesIn, PreferencesOut
 from app.services import preferences_service
+from app.services.advisor import engine
 
 router = APIRouter(prefix="/preferences", tags=["Preferences"])
 
@@ -28,4 +29,6 @@ async def get_preferences(user: CurrentUser, db: DbSession):
     responses={**AUTH_ERRORS, **VALIDATION},
 )
 async def put_preferences(payload: PreferencesIn, user: CurrentUser, db: DbSession):
-    return ok(await preferences_service.upsert(db, user, payload), "Preferences saved successfully")
+    out = await preferences_service.upsert(db, user, payload)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
+    return ok(out, "Preferences saved successfully")

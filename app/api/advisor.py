@@ -17,7 +17,7 @@ from app.schemas.advisor import (
     RecommendationUpdateIn,
     RefreshIn,
 )
-from app.schemas.common import AUTH_ERRORS, CONFLICT, NOT_FOUND, VALIDATION, ApiResponse, ok
+from app.schemas.common import ErrorResponse, AUTH_ERRORS, CONFLICT, NOT_FOUND, VALIDATION, ApiResponse, ok
 from app.services.advisor import engine
 from app.services.advisor.profile import build_profile
 from app.services.providers.extraction import get_extractor
@@ -45,10 +45,12 @@ async def advisor_status(user: CurrentUser, db: DbSession):
     status_code=status.HTTP_202_ACCEPTED,
     summary="Re-run the analysis",
     description="Regenerates only the agents whose data changed (or all of them with `force: true`). Runs in the "
-    "background; if a run is already in progress, that run is returned.",
-    responses=AUTH_ERRORS,
+    "background; if a run is already in progress, that run is returned. Returns `ONBOARDING_INCOMPLETE` (409) "
+    "before onboarding is finished: the first analysis starts by itself when the last screen is saved.",
+    responses={**AUTH_ERRORS, 409: {"model": ErrorResponse, "description": "Onboarding not finished"}},
 )
 async def refresh(payload: RefreshIn, user: CurrentUser, db: DbSession):
+    await engine.require_onboarding(db, user)
     run = await engine.start_analysis(db, user, trigger="MANUAL", force=payload.force)
     return ok(AnalysisRunOut.model_validate(run), "Analysis started")
 
@@ -162,7 +164,7 @@ async def add_extra_data(payload: ExtraDataIn, user: CurrentUser, db: DbSession)
     extractor = get_extractor()
     data = await extractor.extract(payload.category, payload.data)
     row = await engine.add_extra_data(db, user, payload.category, data, extractor.name)
-    await engine.start_analysis(db, user, trigger="EXTRA_DATA")
+    await engine.analyse_if_ready(db, user, trigger="EXTRA_DATA")
     return ok(ExtraDataOut.model_validate(row), "Details saved; analysis updating")
 
 

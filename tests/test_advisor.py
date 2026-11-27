@@ -6,12 +6,31 @@ from pathlib import Path
 
 import pytest
 
-from tests.conftest import API, register_headers
+from tests.conftest import API, RISK_PROFILE, register_headers
 
 FIXTURES = Path(__file__).resolve().parents[1] / "app/services/providers/aggregator/fixtures"
 
 
-async def _connect(client, h) -> dict:
+MONEY = {"annual_income": 6000000, "monthly_spend": 260000, "cash_reserve": 1850000, "currency": "INR"}
+
+
+async def _answer_screens(client, h) -> None:
+    """The onboarding screens after the bank step (money, equity skipped, risk, goals, preferences)."""
+    for method, path, body in [
+        ("PUT", "/financial-profile", MONEY),
+        ("POST", "/onboarding/skip", {"step": "EQUITY"}),
+        ("PUT", "/risk-profile", {**RISK_PROFILE, "single_stock_limit_percent": 10}),
+        ("PUT", "/goals/selection", {"goals": [{"goal_type": "EMERGENCY_FUND"}]}),
+        ("PUT", "/preferences", {}),
+    ]:
+        r = await client.request(method, f"{API}{path}", json=body, headers=h)
+        assert r.status_code in (200, 201), r.text
+
+
+async def _connect(client, h, onboard: bool = True) -> dict:
+    """Answer the screens, then connect the bank: the connection completes onboarding, so it analyses."""
+    if onboard:
+        await _answer_screens(client, h)
     r = await client.post(f"{API}/aggregator/connections", headers=h)
     assert r.status_code == 201, r.text
     cid = r.json()["data"]["connection"]["id"]
@@ -270,3 +289,94 @@ def test_rupee_formatting_uses_indian_grouping():
 
     assert money(53733838.4, "INR") == "₹5,37,33,838"
     assert money(-386400, "INR") == "-₹3,86,400"
+
+
+# ---- flow: bank first, analysis only after every onboarding screen --------------------------------
+
+async def test_bank_connect_is_first_step_and_analysis_waits_for_onboarding(client):
+    h = await register_headers(client)
+    st = (await client.get(f"{API}/onboarding/status", headers=h)).json()["data"]
+    assert st["current_step"] == "BANK_CONNECT"
+
+    data = await _connect(client, h, onboard=False)  # first screen after login
+    assert data["analysis"] is None  # nothing runs on bank data alone
+    st = (await client.get(f"{API}/onboarding/status", headers=h)).json()["data"]
+    assert st["bank_connected_completed"] is True and st["current_step"] == "FINANCIAL_PROFILE"
+
+    s = (await client.get(f"{API}/advisor/status", headers=h)).json()["data"]
+    assert s["phase"] == "WAITING_FOR_ONBOARDING" and s["next_onboarding_step"] == "FINANCIAL_PROFILE"
+    assert s["progress"] == {"completed": 0, "total": 9}
+    r = await client.post(f"{API}/advisor/refresh", json={}, headers=h)
+    assert r.status_code == 409 and r.json()["error_code"] == "ONBOARDING_INCOMPLETE"
+
+    await _answer_screens(client, h)  # saving the last screen starts the analysis
+    s = (await client.get(f"{API}/advisor/status", headers=h)).json()["data"]
+    assert s["phase"] == "READY" and s["onboarding_completed"] is True
+    assert s["progress"] == {"completed": 9, "total": 9}
+    assert s["last_run"]["trigger"] == "PROFILE_UPDATE"
+
+    # the plan uses the screens' answers too (risk screen: 10% single-stock limit)
+    rsu = (await client.get(f"{API}/advisor/agents/RSU", headers=h)).json()["data"]
+    assert rsu["facts"]["single_stock_limit_pct"] == 10
+    o = (await client.get(f"{API}/advisor/overview", headers=h)).json()["data"]
+    assert o["phase"] == "READY" and o["steps"] and o["preview_steps"] == []
+
+
+async def test_bank_step_can_be_skipped(client):
+    h = await register_headers(client)
+    r = await client.post(f"{API}/onboarding/skip", json={"step": "BANK_CONNECT"}, headers=h)
+    assert r.json()["data"]["bank_skipped"] is True
+    await _answer_screens(client, h)
+    s = (await client.get(f"{API}/advisor/status", headers=h)).json()["data"]
+    assert s["phase"] == "READY"  # screens alone are enough for a first plan
+
+    # with no bank data, the Money screen drives the numbers
+    prof = (await client.get(f"{API}/advisor/profile", headers=h)).json()["data"]
+    domains = prof.get("domains", prof)
+    assert domains["data_sources"]["filled_from_money_screen"] == ["cashflow", "cash"]
+    assert domains["cashflow"]["monthly_salary"] == 500000  # 60L / 12
+    assert domains["balance_sheet"]["cash"] == 1850000
+    budget = (await client.get(f"{API}/advisor/agents/BUDGET", headers=h)).json()["data"]
+    assert budget["facts"]["monthly_spend"] == 260000
+
+
+async def test_bank_data_wins_over_money_screen(client):
+    h = await register_headers(client)
+    await _connect(client, h)
+    domains = (await client.get(f"{API}/advisor/profile", headers=h)).json()["data"]
+    domains = domains.get("domains", domains)
+    assert domains["data_sources"]["filled_from_money_screen"] == []
+    assert domains["cashflow"].get("source") != "MONEY_SCREEN"
+    assert domains["self_reported"]["annual_income"] == 6000000  # still given to the agents for comparison
+
+
+async def test_editing_a_screen_after_onboarding_reanalyses(client):
+    h = await register_headers(client)
+    await _connect(client, h)
+    before = (await client.get(f"{API}/advisor/status", headers=h)).json()["data"]["last_run"]["id"]
+    await client.put(f"{API}/risk-profile", json={**RISK_PROFILE, "single_stock_limit_percent": 50}, headers=h)
+    run = (await client.get(f"{API}/advisor/status", headers=h)).json()["data"]["last_run"]
+    assert run["id"] > before and "RSU" in run["agents_regenerated"]
+
+
+def test_preview_steps_merge_finished_agents():
+    from app.models.advisor import AgentState
+    from app.models.enums import AgentKey, AgentStatus
+    from app.services.advisor.engine import _preview_steps, _progress
+
+    def rec(key, impact, amount=0):
+        return {"key": key, "title": key, "why": "w", "action_steps": ["a"], "impact": impact, "effort": "LOW",
+                "timeframe": "NOW", "amount": amount}
+
+    states = {
+        AgentKey.RSU: AgentState(agent_key=AgentKey.RSU, status=AgentStatus.READY,
+                                 insight={"recommendations": [rec("diversify-single-stock", "HIGH", 5)]}),
+        AgentKey.INVESTMENT: AgentState(agent_key=AgentKey.INVESTMENT, status=AgentStatus.READY,
+                                        insight={"recommendations": [rec("deploy-idle-cash", "MEDIUM", 9),
+                                                                     rec("diversify-single-stock", "HIGH", 5)]}),
+        AgentKey.TAX: AgentState(agent_key=AgentKey.TAX, status=AgentStatus.RUNNING, insight=None),
+    }
+    steps = _preview_steps(states)
+    assert [s["key"] for s in steps] == ["diversify-single-stock", "deploy-idle-cash"]  # HIGH impact first
+    assert sorted(steps[0]["agents"]) == ["INVESTMENT", "RSU"]  # same action from two agents, shown once
+    assert _progress(states) == {"completed": 2, "total": 9}

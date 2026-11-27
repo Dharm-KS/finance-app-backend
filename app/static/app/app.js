@@ -60,7 +60,7 @@
 
   // ---- sign in ---------------------------------------------------------------------------------
   function showLogin() {
-    show($("login-view")); show($("app-view"), false); show($("logout-btn"), false);
+    show($("login-view")); show($("app-view"), false); show($("onboard-view"), false); show($("logout-btn"), false);
     $("user-label").textContent = "";
     $("client-id").value = store.get("ft_client_id") || "finance-mobile-app";
     $("client-secret").value = store.get("ft_client_secret") || "";
@@ -112,11 +112,14 @@
 
   // ---- app shell -------------------------------------------------------------------------------
   async function enterApp() {
-    show($("login-view"), false); show($("app-view")); show($("logout-btn"));
+    show($("login-view"), false); show($("logout-btn"));
     try {
       state.user = await call("GET", "/auth/me");
       $("user-label").textContent = state.user.name || state.user.mobile;
+      const ob = await call("GET", "/onboarding/status");
+      if (!ob.onboarding_completed) return showOnboarding(ob);
     } catch { return; }
+    show($("onboard-view"), false); show($("app-view"));
     switchTab("plan");
   }
 
@@ -132,12 +135,12 @@
 
   async function pollStatus() {
     stopPolling();
-    let s;
-    try { s = await call("GET", "/advisor/status"); } catch { return; }
+    let s, o;
+    try { [s, o] = await Promise.all([call("GET", "/advisor/status"), call("GET", "/advisor/overview")]); } catch { return; }
     const pill = $("run-pill");
     if (s.running) {
-      pill.textContent = "Analysing…"; show(pill);
-      renderProgress(s.agents);
+      pill.textContent = `Analysing… ${s.progress.completed}/${s.progress.total}`; show(pill);
+      if (!o.ready) renderProgress(s, o);  // first analysis: show progress + early suggestions
       state.polling = setTimeout(pollStatus, 1500);
     } else {
       loadPlan();
@@ -145,22 +148,39 @@
     }
   }
 
-  function renderProgress(agents) {
+  function renderProgress(s, o) {
     show($("progress-card")); show($("plan-content"), false); show($("connect-empty"), false);
-    $("progress-agents").innerHTML = agents.map((a) => `<span class="chip status-${esc(a.status)}">${esc(label(a.key))} · ${esc(label(a.status))}</span>`).join("");
+    const { completed, total } = s.progress;
+    $("progress-fill").style.width = `${Math.round((completed / total) * 100)}%`;
+    $("progress-text").textContent = completed < total - 1
+      ? `${completed} of ${total - 1} specialists done` : "Chief agent is combining everything into your plan…";
+    $("progress-agents").innerHTML = s.agents.map((a) => `<span class="chip status-${esc(a.status)}">${esc(label(a.key))} · ${esc(label(a.status))}</span>`).join("");
+    const preview = o?.preview_steps || [];
+    show($("preview-wrap"), preview.length > 0);
+    $("preview-steps").innerHTML = preview.map((r, i) => previewHtml(r, i + 1)).join("");
+  }
+
+  function previewHtml(r, num) {
+    const amount = r.amount ? `<span class="step-amount">${esc(money(r.amount))}</span>` : "";
+    return `<li class="step preview"><div class="step-num">${num}</div><div class="step-body">
+      <div class="step-head"><span class="step-title">${esc(r.title)}</span>${amount}</div>
+      <p class="step-why">${esc(r.why)}</p>
+      <div class="chips"><span class="chip">Impact ${esc(label(r.impact))}</span>${r.agents.map((a) => `<span class="chip gold">${esc(label(a))}</span>`).join("")}</div>
+      </div></li>`;
   }
 
   // ---- plan ------------------------------------------------------------------------------------
   async function loadPlan() {
     let o, s;
     try { [o, s] = await Promise.all([call("GET", "/advisor/overview"), call("GET", "/advisor/status")]); } catch { return; }
-    if (s.running) { renderProgress(s.agents); if (!state.polling) state.polling = setTimeout(pollStatus, 1500); return; }
-    show($("progress-card"), false);
+    if (s.phase === "WAITING_FOR_ONBOARDING") return enterApp();
+    if (s.running && !o.ready) { renderProgress(s, o); if (!state.polling) state.polling = setTimeout(pollStatus, 1500); return; }
+    if (s.running && !state.polling) state.polling = setTimeout(pollStatus, 1500);  // re-run: keep showing the current plan
+    show($("progress-card"), false); show($("preview-wrap"), false);
     if (!o.ready) {
-      const conns = await call("GET", "/aggregator/connections").catch(() => []);
-      if (conns.some((c) => c.status === "ACTIVE") && !state.autoRefreshed) {
+      if (!state.autoRefreshed) {
         state.autoRefreshed = true;  // only once per page load, so a failing analysis can't loop
-        await call("POST", "/advisor/refresh", {});
+        await call("POST", "/advisor/refresh", {}).catch(() => {});
         return pollStatus();
       }
       show($("connect-empty")); show($("plan-content"), false); return;
@@ -235,19 +255,24 @@
     if (head) head.closest(".step-body").querySelector(".step-detail").classList.toggle("hidden");
   });
 
+  $("run-analysis-btn").onclick = async () => {
+    try { await call("POST", "/advisor/refresh", {}); pollStatus(); } catch (e) { toast(e.message); }
+  };
+
   $("refresh-btn").onclick = async () => {
     try { await call("POST", "/advisor/refresh", { force: false }); pollStatus(); } catch (e) { toast(e.message); }
   };
 
   // ---- connect bank ----------------------------------------------------------------------------
   let pendingConnection = null;
-  document.querySelectorAll(".connect-btn").forEach((b) => (b.onclick = async () => {
+  async function startConnect() {
     try {
       const data = await call("POST", "/aggregator/connections");
       pendingConnection = data.connection.id;
       $("agg-otp").value = ""; $("agg-msg").textContent = ""; show($("connect-modal")); $("agg-otp").focus();
     } catch (e) { toast(e.message); }
-  }));
+  }
+  document.querySelectorAll(".connect-btn").forEach((b) => (b.onclick = startConnect));
   $("agg-cancel").onclick = () => show($("connect-modal"), false);
   $("agg-verify").onclick = async () => {
     $("agg-verify").disabled = true;
@@ -255,10 +280,116 @@
       const data = await call("POST", `/aggregator/connections/${pendingConnection}/verify-otp`, { otp: $("agg-otp").value.trim() });
       show($("connect-modal"), false);
       toast(`Imported ${data.reports.length} report(s)`);
+      if (state.onboarding) return nextOnboardingStep();
       switchTab("plan"); pollStatus();
     } catch (e) { $("agg-msg").textContent = e.message; $("agg-msg").classList.add("error"); }
     finally { $("agg-verify").disabled = false; }
   };
+
+
+  // ---- onboarding wizard (bank first, then the 5 screens; the analysis starts after the last one) ---
+  const OB_STEPS = [["BANK_CONNECT", "Bank"], ["FINANCIAL_PROFILE", "Money"], ["EQUITY", "Equity"], ["RISK", "Risk"],
+    ["GOALS", "Goals"], ["PREFERENCES", "Preferences"]];
+  const num = (id) => { const v = $(id)?.value.trim(); return v === "" || v == null ? null : Number(v); };
+  const field = (id, text, value = "", attrs = 'inputmode="decimal"') =>
+    `<label>${esc(text)}<input id="${id}" ${attrs} value="${esc(value ?? "")}"></label>`;
+  const select = (id, text, options, value) =>
+    `<label>${esc(text)}<select id="${id}">${options.map(([v, t]) => `<option value="${v}" ${v === value ? "selected" : ""}>${esc(t)}</option>`).join("")}</select></label>`;
+  const obMsg = () => `<p id="ob-msg" class="msg"></p>`;
+  const obError = (e) => { const m = $("ob-msg"); if (m) { m.textContent = e.message; m.classList.add("error"); } };
+
+  async function nextOnboardingStep() {
+    try { showOnboarding(await call("GET", "/onboarding/status")); } catch (e) { toast(e.message); }
+  }
+
+  async function showOnboarding(ob) {
+    stopPolling();
+    if (ob.onboarding_completed) {
+      state.onboarding = false; state.autoRefreshed = true;
+      show($("onboard-view"), false); show($("app-view")); switchTab("plan"); pollStatus();
+      return;
+    }
+    state.onboarding = true;
+    show($("app-view"), false); show($("onboard-view"));
+    const idx = OB_STEPS.findIndex(([k]) => k === ob.current_step);
+    $("ob-stepper").innerHTML = OB_STEPS.map(([, t], i) => `<span class="${i < idx ? "done" : i === idx ? "current" : ""}">${i + 1}. ${esc(t)}</span>`).join("");
+    const card = $("ob-card");
+    const step = ob.current_step;
+
+    if (step === "BANK_CONNECT") {
+      card.innerHTML = `<h1>Connect your bank accounts</h1>
+        <p class="muted">We read your accounts, investments, loans, cards and property so your plan uses real numbers. Test OTP: <b>123456</b>.</p>
+        <div class="row"><button class="btn primary connect-btn" id="ob-connect">Connect bank accounts</button>
+        <button class="btn ghost" id="ob-skip">Skip for now</button></div>${obMsg()}`;
+      $("ob-connect").onclick = startConnect;
+      $("ob-skip").onclick = () => call("POST", "/onboarding/skip", { step: "BANK_CONNECT" }).then(showOnboarding).catch(obError);
+    } else if (step === "FINANCIAL_PROFILE") {
+      const fp = (await call("GET", "/financial-profile")).profile || {};
+      card.innerHTML = `<h1>Your money</h1><p class="muted">Amounts in ₹.</p><div class="form-grid">
+        ${field("fp-income", "Annual income", fp.annual_income)}${field("fp-spend", "Monthly spend", fp.monthly_spend)}
+        ${field("fp-cash", "Cash reserve", fp.cash_reserve)}${field("fp-emi", "Monthly EMI (optional)", fp.monthly_emi)}
+        ${field("fp-debt", "Total debt (optional)", fp.total_debt)}${field("fp-inv", "Investments (optional)", fp.investments)}
+        ${field("fp-age", "Age (optional)", fp.age, 'inputmode="numeric"')}${field("fp-dep", "Dependents (optional)", fp.dependents, 'inputmode="numeric"')}
+        ${field("fp-ins", "Life insurance cover (optional)", fp.insurance_cover)}</div>
+        <button class="btn primary" id="ob-save">Continue</button>${obMsg()}`;
+      $("ob-save").onclick = () => call("PUT", "/financial-profile", {
+        annual_income: num("fp-income"), monthly_spend: num("fp-spend"), cash_reserve: num("fp-cash"), currency: "INR",
+        monthly_emi: num("fp-emi"), total_debt: num("fp-debt"), investments: num("fp-inv"), age: num("fp-age"),
+        dependents: num("fp-dep"), insurance_cover: num("fp-ins"),
+      }).then(nextOnboardingStep).catch(obError);
+    } else if (step === "EQUITY") {
+      card.innerHTML = `<h1>Employer stock</h1><p class="muted">RSUs or ESOPs from your employer, if you have any.</p><div class="form-grid">
+        ${field("eq-name", "Employer", "", "")}${field("eq-vested", "Vested value (₹)")}
+        ${field("eq-unvested", "Unvested value (₹)")}${field("eq-date", "Next vest date", "", 'type="date"')}</div>
+        <div class="row"><button class="btn primary" id="ob-save">Save &amp; continue</button>
+        <button class="btn ghost" id="ob-skip">I don't have employer stock</button></div>${obMsg()}`;
+      $("ob-save").onclick = () => call("POST", "/equity", {
+        employer_name: $("eq-name").value.trim(), vested_value: num("eq-vested"), unvested_value: num("eq-unvested") ?? 0,
+        next_vest_date: $("eq-date").value || null, currency: "INR",
+      }).then(nextOnboardingStep).catch(obError);
+      $("ob-skip").onclick = () => call("POST", "/onboarding/skip", { step: "EQUITY" }).then(showOnboarding).catch(obError);
+    } else if (step === "RISK") {
+      card.innerHTML = `<h1>Risk</h1><div class="form-grid">
+        ${select("rk-tol", "How do you like to invest?", [["STEADY", "Steady"], ["BALANCED", "Balanced"], ["GROWTH", "Growth"]], "BALANCED")}
+        ${field("rk-dd", "Largest fall you can live with (%)", 20)}${field("rk-ss", "Max in any single stock (%)", 10)}
+        ${field("rk-h", "Planning horizon (years)", 10, 'inputmode="numeric"')}</div>
+        <button class="btn primary" id="ob-save">Continue</button>${obMsg()}`;
+      $("ob-save").onclick = () => call("PUT", "/risk-profile", {
+        risk_tolerance: $("rk-tol").value, max_drawdown_percent: num("rk-dd"), single_stock_limit_percent: num("rk-ss"),
+        planning_horizon_years: num("rk-h"),
+      }).then(nextOnboardingStep).catch(obError);
+    } else if (step === "GOALS") {
+      const cards = await call("GET", "/goals/suggestions");
+      card.innerHTML = `<h1>Your goals</h1><p class="muted">Pick what matters to you.</p>
+        ${cards.map((g) => `<div class="goal-opt"><label class="check"><input type="checkbox" data-goal="${esc(g.goal_type)}" ${g.already_added ? "checked" : ""}>
+          <b>${esc(g.name)}</b>${g.calculation.suggested_target_amount ? ` <span class="step-amount">${esc(money(g.calculation.suggested_target_amount))}</span>` : ""}</label>
+          <p class="muted small">${esc(g.description)}</p>
+          ${(g.calculation.required_inputs || []).map((f) => field(`gi-${g.goal_type}-${f}`, label(f))).join("")}</div>`).join("")}
+        <button class="btn primary" id="ob-save">Continue</button>${obMsg()}`;
+      $("ob-save").onclick = () => {
+        const goals = [...document.querySelectorAll("[data-goal]:checked")].map((c) => {
+          const g = cards.find((x) => x.goal_type === c.dataset.goal);
+          const inputs = Object.fromEntries((g.calculation.required_inputs || []).map((f) => [f, num(`gi-${g.goal_type}-${f}`)]));
+          return Object.keys(inputs).length ? { goal_type: g.goal_type, inputs } : { goal_type: g.goal_type };
+        });
+        if (!goals.length) return obError(new Error("Pick at least one goal."));
+        call("PUT", "/goals/selection", { goals }).then(nextOnboardingStep).catch(obError);
+      };
+    } else if (step === "PREFERENCES") {
+      const pr = await call("GET", "/preferences");
+      card.innerHTML = `<h1>Preferences</h1>
+        ${select("pr-tone", "How detailed should insights be?", [["CONCISE", "Concise"], ["BALANCED", "Balanced"], ["DETAILED", "Detailed"]], pr.insight_tone)}
+        <label class="check"><input type="checkbox" id="pr-vest" ${pr.vesting_alerts ? "checked" : ""}> Vesting alerts</label>
+        <label class="check"><input type="checkbox" id="pr-tax" ${pr.tax_deadline_alerts ? "checked" : ""}> Tax deadline alerts</label>
+        <label class="check"><input type="checkbox" id="pr-week" ${pr.weekly_digest ? "checked" : ""}> Weekly digest</label>
+        <p class="muted small">When you finish, your AI agents start building your plan from your bank data and these answers.</p>
+        <button class="btn primary" id="ob-save">Finish &amp; build my plan</button>${obMsg()}`;
+      $("ob-save").onclick = () => call("PUT", "/preferences", {
+        insight_tone: $("pr-tone").value, vesting_alerts: $("pr-vest").checked, tax_deadline_alerts: $("pr-tax").checked,
+        weekly_digest: $("pr-week").checked,
+      }).then(nextOnboardingStep).catch(obError);
+    }
+  }
 
   // ---- agents ----------------------------------------------------------------------------------
   async function loadAgents() {

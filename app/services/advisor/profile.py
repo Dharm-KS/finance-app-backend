@@ -341,10 +341,39 @@ async def build_profile(db: AsyncSession, user: User) -> CustomerProfile:
         "tolerance": risk.risk_tolerance.value, "max_drawdown_pct": r2(risk.max_drawdown_percent),
         "single_stock_limit_pct": r2(risk.single_stock_limit_percent), "horizon_years": risk.planning_horizon_years,
     } if risk else None
-    d["self_reported"] = {
+    self_rep = {
         "annual_income": cv(fin.annual_income, fin.currency.value), "monthly_spend": cv(fin.monthly_spend, fin.currency.value),
-        "cash_reserve": cv(fin.cash_reserve, fin.currency.value),
+        "cash_reserve": cv(fin.cash_reserve, fin.currency.value), "monthly_emi": cv(fin.monthly_emi, fin.currency.value),
+        "total_debt": cv(fin.total_debt, fin.currency.value), "investments": cv(fin.investments, fin.currency.value),
     } if fin else None
+    d["self_reported"] = self_rep
+
+    # Bank data is measured, so it wins where it exists; the Money screen's answers fill whatever the
+    # bank data doesn't cover (or everything, when the customer skipped connecting a bank).
+    filled: list[str] = []
+    if self_rep:
+        if not d["cashflow"].get("months_covered") and (self_rep["annual_income"] or self_rep["monthly_spend"]):
+            income, spend = (self_rep["annual_income"] or 0) / 12, self_rep["monthly_spend"] or 0
+            emi = self_rep["monthly_emi"] or 0
+            d["cashflow"] = {
+                "source": "MONEY_SCREEN", "months_covered": 0,
+                "monthly_salary": r2(income), "monthly_other_income": 0.0,
+                "monthly_spend": r2(spend + emi),
+                "monthly_essential_spend": r2(spend + emi),  # no breakdown: treat it all as essential (conservative)
+                "monthly_discretionary_spend": None, "monthly_saving_investing": None, "monthly_transfers_out": None,
+                "savings_rate_pct": round((income - spend - emi) / income * 100, 1) if income else None,
+                "monthly_by_category": {"LOAN_PAYMENT": r2(emi)} if emi else {}, "salary_payers": [],
+            }
+            filled.append("cashflow")
+        if not accounts and self_rep["cash_reserve"]:
+            cash = self_rep["cash_reserve"]
+            filled.append("cash")
+        if not d["investments"] and self_rep["investments"]:
+            invest_total = self_rep["investments"]
+            filled.append("investments")
+        if not loans and self_rep["total_debt"]:
+            loans_total = self_rep["total_debt"]
+            filled.append("loans")
     d["preferences"] = {
         "tone": prefs.insight_tone.value, "vesting_alerts": prefs.vesting_alerts,
         "tax_deadline_alerts": prefs.tax_deadline_alerts,
@@ -367,6 +396,7 @@ async def build_profile(db: AsyncSession, user: User) -> CustomerProfile:
     d["data_sources"] = {
         "aggregator_connected": bool(infos or accounts or portfolios),
         "onboarding_profile": fin is not None,
+        "filled_from_money_screen": filled,
         "extra_categories": sorted(d["extra"]),
     }
     return CustomerProfile(currency=currency, domains=d)

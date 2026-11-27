@@ -41,11 +41,11 @@ code { color: var(--gold); }
 .hero-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
 
 label { display: block; font-size: 13px; color: var(--muted); margin: 10px 0; }
-input {
+input, select {
   display: block; width: 100%; margin-top: 6px; padding: 11px 12px; border-radius: 10px; border: 1px solid var(--border);
   background: var(--surface-2); color: var(--text); font: inherit;
 }
-input:focus { outline: 2px solid var(--gold); outline-offset: 0; }
+input:focus, select:focus { outline: 2px solid var(--gold); outline-offset: 0; }
 label.check { display: flex; align-items: center; gap: 8px; color: var(--text); }
 label.check input { width: auto; margin: 0; }
 
@@ -163,3 +163,15 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   .step-num { width: 30px; height: 30px; font-size: 13px; }
   .bubble { max-width: 92%; }
 }
+
+/* onboarding wizard + analysis progress */
+.stepper { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 14px; }
+.stepper span { font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
+.stepper span.done { color: var(--gold); border-color: var(--gold); }
+.stepper span.current { background: var(--gold); color: #111; border-color: var(--gold); font-weight: 600; }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 14px; }
+.goal-opt { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin: 8px 0; }
+.goal-opt .muted { margin: 4px 0 0; }
+.bar { height: 8px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; margin: 12px 0 6px; }
+.bar-fill { height: 100%; width: 0; background: var(--gold); transition: width .4s ease; }
+.step.preview .step-num { opacity: .7; }

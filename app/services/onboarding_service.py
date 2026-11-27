@@ -10,9 +10,16 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.exceptions import AppError, ErrorCode
+from app.models.aggregator import AggregatorConnection
 from app.models.consent import Consent
 from app.models.credit_report import CreditReport
-from app.models.enums import ConsentStatus, ConsentType, CreditReportStatus, OnboardingStep
+from app.models.enums import (
+    AggregatorConnectionStatus,
+    ConsentStatus,
+    ConsentType,
+    CreditReportStatus,
+    OnboardingStep,
+)
 from app.models.equity import EquityHolding
 from app.models.financial_profile import FinancialProfile
 from app.models.goal import FinancialGoal
@@ -21,10 +28,12 @@ from app.models.preferences import UserPreferences
 from app.models.risk_profile import RiskProfile
 from app.models.user import User
 
-# The calibration screens, in app order. Mobile/OTP comes before (the user exists once it
-# succeeds). Name, consent and credit are tracked as flags but don't block onboarding: credit
-# data is fetched and used by the backend.
+# The onboarding screens, in app order. Mobile/OTP comes before (the user exists once it
+# succeeds); connecting bank accounts is the first screen after it. Name, consent and credit are
+# tracked as flags but don't block onboarding. The AI analysis starts once every step is done, so
+# its first plan uses the bank data and all the screens' answers together.
 STEP_ORDER: list[tuple[OnboardingStep, str]] = [
+    (OnboardingStep.BANK_CONNECT, "bank_connected_completed"),
     (OnboardingStep.FINANCIAL_PROFILE, "financial_profile_completed"),
     (OnboardingStep.EQUITY, "equity_completed"),
     (OnboardingStep.RISK, "risk_completed"),
@@ -32,7 +41,7 @@ STEP_ORDER: list[tuple[OnboardingStep, str]] = [
     (OnboardingStep.PREFERENCES, "preferences_completed"),
 ]
 
-SKIPPABLE_STEPS = {OnboardingStep.EQUITY}
+SKIPPABLE_STEPS = {OnboardingStep.BANK_CONNECT, OnboardingStep.EQUITY}
 
 
 async def get_or_create(db: AsyncSession, user: User) -> Onboarding:
@@ -80,6 +89,10 @@ async def refresh(db: AsyncSession, user: User) -> Onboarding:
                 CreditReport.user_id == uid, CreditReport.report_status == CreditReportStatus.SUCCESS
             )
         ),
+        "bank_connected_completed": ob.bank_skipped
+        or await _exists(db, select(AggregatorConnection.id).where(
+            AggregatorConnection.user_id == uid, AggregatorConnection.status == AggregatorConnectionStatus.ACTIVE
+        )),
         "financial_profile_completed": await _exists(db, select(FinancialProfile.id).where(FinancialProfile.user_id == uid)),
         "equity_completed": ob.equity_skipped
         or await _exists(db, select(EquityHolding.id).where(EquityHolding.user_id == uid)),
@@ -110,6 +123,8 @@ async def skip_step(db: AsyncSession, user: User, step: OnboardingStep) -> Onboa
     ob = await get_or_create(db, user)
     if step == OnboardingStep.EQUITY:
         ob.equity_skipped = True
+    elif step == OnboardingStep.BANK_CONNECT:
+        ob.bank_skipped = True
     ob = await refresh(db, user)
     await db.commit()
     return ob

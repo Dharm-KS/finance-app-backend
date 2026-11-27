@@ -14,7 +14,7 @@ from app.schemas.advisor import (
     SyncOut,
 )
 from app.schemas.common import AUTH_ERRORS, CONFLICT, NOT_FOUND, VALIDATION, ApiResponse, ErrorResponse, ok
-from app.services import aggregator_service
+from app.services import aggregator_service, onboarding_service
 from app.services.advisor import engine
 from app.services.aggregator_service import OTP_TTL
 from app.services.providers.aggregator import AggregatorProvider, get_aggregator_provider
@@ -29,11 +29,13 @@ OTP_ERRORS = {400: {"model": ErrorResponse, "description": "Invalid / expired OT
 
 
 async def _after_sync(db, user, result: dict) -> dict | None:
-    """New or changed data -> (re)analyse; only the agents whose inputs changed are regenerated."""
+    """Connecting completes the BANK_CONNECT onboarding step. New or changed data is analysed only once
+    onboarding is complete (the first analysis needs every screen too); then only affected agents regenerate."""
     if not result["changed"]:
+        await onboarding_service.refresh(db, user)
+        await db.commit()
         return None
-    run = await engine.start_analysis(db, user, trigger="AGGREGATOR_SYNC")
-    return {"run_id": run.id, "status": run.status.value}
+    return await engine.analyse_if_ready(db, user, trigger="AGGREGATOR_SYNC")
 
 
 def _sync_out(conn, result: dict, analysis: dict | None) -> dict:
@@ -60,8 +62,9 @@ async def start_connection(user: CurrentUser, db: DbSession, provider: Provider)
     "/connections/{connection_id}/verify-otp",
     response_model=ApiResponse[SyncOut],
     summary="Verify the OTP and import the data",
-    description="Verifies the aggregator OTP, fetches the reports, stores each section in its own table and "
-    "starts the AI analysis in the background (poll `GET /advisor/status`).",
+    description="Verifies the aggregator OTP, fetches the reports and stores each section in its own table. This is the "
+    "first onboarding screen after login; the AI analysis starts once onboarding is complete "
+    "(`analysis` is null until then).",
     responses={**AUTH_ERRORS, **NOT_FOUND, **VALIDATION, **OTP_ERRORS},
 )
 async def verify_connection(payload: OtpIn, user: CurrentUser, db: DbSession, provider: Provider,

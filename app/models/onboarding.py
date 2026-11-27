@@ -24,6 +24,10 @@ class Onboarding(IdMixin, TimestampMixin, Base):
     registration_completed: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     consent_completed: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     credit_completed: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    bank_connected_completed: Mapped[bool] = mapped_column(
+        Boolean, default=False, server_default=sa_false(), nullable=False
+    )
+    bank_skipped: Mapped[bool] = mapped_column(Boolean, default=False, server_default=sa_false(), nullable=False)
     financial_profile_completed: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     equity_completed: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     equity_skipped: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)

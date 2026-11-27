@@ -23,13 +23,13 @@ async def test_register_verify_creates_user_and_returns_token(client):
     assert data["is_new_user"] is True
     assert data["user"]["name"] == "Aarav Sharma"
     assert data["user"]["is_verified"] is True
-    assert data["next_step"] == "FINANCIAL_PROFILE"  # first calibration screen after OTP
+    assert data["next_step"] == "BANK_CONNECT"  # first screen after OTP: connect bank accounts
     assert OTP not in str(data)
 
 
 async def test_register_without_name_then_patch_me(client):
     data = await register(client, "9876543211", name=None)
-    assert data["next_step"] == "FINANCIAL_PROFILE"  # name is optional, it doesn't block onboarding
+    assert data["next_step"] == "BANK_CONNECT"  # name is optional, it doesn't block onboarding
     headers = auth(data["access_token"])
     r = await client.patch(f"{API}/auth/me", json={"name": "Priya Nair"}, headers=headers)
     assert r.status_code == 200
@@ -53,7 +53,7 @@ async def test_login_flow(client):
     assert r.status_code == 200
     data = r.json()["data"]
     assert data["is_new_user"] is False
-    assert data["next_step"] == "FINANCIAL_PROFILE"
+    assert data["next_step"] == "BANK_CONNECT"
     assert data["user"]["last_login_at"] is not None
 
 

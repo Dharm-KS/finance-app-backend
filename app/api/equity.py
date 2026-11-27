@@ -4,6 +4,7 @@ from app.api.deps import CurrentUser, DbSession
 from app.schemas.common import AUTH_ERRORS, NOT_FOUND, VALIDATION, ApiResponse, ok
 from app.schemas.equity import EquityCreate, EquityListOut, EquityOut, EquityUpdate
 from app.services import equity_service
+from app.services.advisor import engine
 
 router = APIRouter(prefix="/equity", tags=["Equity"])
 
@@ -31,6 +32,7 @@ async def list_equity(user: CurrentUser, db: DbSession):
 )
 async def create_equity(payload: EquityCreate, user: CurrentUser, db: DbSession):
     holding = await equity_service.create(db, user, payload)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
     return ok(EquityOut.model_validate(holding), "Equity holding added successfully")
 
 
@@ -43,6 +45,7 @@ async def create_equity(payload: EquityCreate, user: CurrentUser, db: DbSession)
 )
 async def update_equity(payload: EquityUpdate, user: CurrentUser, db: DbSession, holding_id: int = HoldingId):
     holding = await equity_service.update(db, user, holding_id, payload)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
     return ok(EquityOut.model_validate(holding), "Equity holding updated successfully")
 
 
@@ -55,4 +58,5 @@ async def update_equity(payload: EquityUpdate, user: CurrentUser, db: DbSession,
 )
 async def delete_equity(user: CurrentUser, db: DbSession, holding_id: int = HoldingId):
     await equity_service.delete(db, user, holding_id)
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
     return ok(None, "Equity holding deleted successfully")

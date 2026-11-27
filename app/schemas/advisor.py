@@ -201,8 +201,36 @@ class RecommendationUpdateIn(BaseModel):
     status: RecommendationStatus
 
 
+Phase = Literal["WAITING_FOR_ONBOARDING", "NOT_STARTED", "ANALYSING", "READY"]
+
+
+class ProgressOut(BaseModel):
+    completed: int = Field(description="Agents (8 specialists + Chief) with a finished analysis")
+    total: int
+
+
+class PreviewStepOut(BaseModel):
+    """A specialist's suggestion shown while the analysis is still running (before the Chief's plan)."""
+
+    key: str
+    title: str
+    why: str
+    action_steps: list[str]
+    impact: Level
+    effort: Level
+    timeframe: Timeframe
+    amount: float | None
+    agents: list[str]
+
+
 class OverviewOut(BaseModel):
     ready: bool = Field(description="False until the first analysis finishes")
+    phase: Phase = Field(description="WAITING_FOR_ONBOARDING -> ANALYSING -> READY")
+    progress: ProgressOut
+    preview_steps: list[PreviewStepOut] = Field(
+        description="While the first analysis runs: suggestions from the agents that have finished so far. "
+        "Empty once the Chief's step-by-step plan (`steps`) is ready."
+    )
     headline: str | None
     summary: str | None
     health: Health | None
@@ -236,6 +264,10 @@ class AdvisorStatusOut(BaseModel):
     ready: bool
     running: bool
     stale: bool = Field(description="True when the customer's data changed since the last analysis")
+    phase: Phase = Field(description="WAITING_FOR_ONBOARDING -> ANALYSING -> READY")
+    onboarding_completed: bool
+    next_onboarding_step: str
+    progress: ProgressOut
     last_run: AnalysisRunOut | None
     agents: list[dict[str, Any]]
 

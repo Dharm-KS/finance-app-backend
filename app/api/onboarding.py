@@ -5,6 +5,7 @@ from app.models.enums import OnboardingStep
 from app.schemas.common import AUTH_ERRORS, VALIDATION, ApiResponse, ok
 from app.schemas.onboarding import OnboardingSkipIn, OnboardingStatusOut
 from app.services import onboarding_service
+from app.services.advisor import engine
 
 router = APIRouter(prefix="/onboarding", tags=["Onboarding"])
 
@@ -31,4 +32,5 @@ async def onboarding_status(user: CurrentUser, db: DbSession):
 )
 async def skip_step(payload: OnboardingSkipIn, user: CurrentUser, db: DbSession):
     ob = await onboarding_service.skip_step(db, user, OnboardingStep(payload.step))
+    await engine.analyse_if_ready(db, user, trigger="PROFILE_UPDATE")
     return ok(OnboardingStatusOut.model_validate(ob), "Step skipped")

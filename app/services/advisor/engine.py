@@ -28,6 +28,7 @@ from app.schemas.advisor import AgentInsight, ChiefInsight
 from app.services.advisor.agents import AGENTS, AGENTS_BY_KEY, AgentSpec
 from app.services.advisor.chief import build_chief_context, offline_chief
 from app.services.advisor.llm import LLMError, LLMProvider, OfflineProvider, get_llm_provider
+from app.services import onboarding_service
 from app.services.advisor.profile import build_profile
 
 logger = logging.getLogger(__name__)
@@ -81,6 +82,28 @@ async def start_analysis(db: AsyncSession, user: User, trigger: str, force: bool
     return run
 
 
+async def analyse_if_ready(db: AsyncSession, user: User, trigger: str) -> dict | None:
+    """Start an analysis once onboarding is complete; before that, nothing runs.
+
+    The first analysis therefore always sees the bank data *and* every onboarding answer. After
+    onboarding, any change to the customer's data re-analyses (only the affected agents regenerate).
+    """
+    ob = await onboarding_service.refresh(db, user)
+    await db.commit()
+    if not ob.onboarding_completed:
+        return None
+    run = await start_analysis(db, user, trigger=trigger)
+    return {"run_id": run.id, "status": run.status.value}
+
+
+async def require_onboarding(db: AsyncSession, user: User) -> None:
+    ob = await onboarding_service.refresh(db, user)
+    await db.commit()
+    if not ob.onboarding_completed:
+        raise AppError(409, f"Finish onboarding first (next step: {ob.current_step.value}); "
+                       "the analysis starts automatically when it's done.", ErrorCode.ONBOARDING_INCOMPLETE)
+
+
 async def _run_in_new_session(user_id: int, run_id: int, force: bool) -> None:
     async with AsyncSessionLocal() as db:
         user = await db.get(User, user_id)
@@ -130,14 +153,21 @@ async def execute_run(db: AsyncSession, user: User, run: AnalysisRun, force: boo
                     logger.warning("agent %s fell back to offline: %s", spec.key, e)
                     return await OfflineProvider().agent_insight(spec, facts, None), "offline-fallback", str(e)
 
-        results = await asyncio.gather(*(one(spec, facts, st) for spec, facts, _, st in planned))
-        now = utcnow()
-        for (spec, facts, h, st), (ins, used, err) in zip(planned, results, strict=True):
-            st.insight, st.facts, st.input_hash = ins, facts, h
-            st.status, st.provider, st.error = AgentStatus.READY, used, err
-            st.model = provider.model if used == provider.name else None
-            st.version += 1
-            st.generated_at = now
+        # Each agent is saved the moment it finishes, so the app can show its suggestions while the
+        # others (and then the Chief) are still working. One lock: the session isn't concurrency-safe.
+        db_lock = asyncio.Lock()
+
+        async def run_and_save(spec: AgentSpec, facts: dict, h: str, st: AgentState):
+            ins, used, err = await one(spec, facts, st)
+            async with db_lock:
+                st.insight, st.facts, st.input_hash = ins, facts, h
+                st.status, st.provider, st.error = AgentStatus.READY, used, err
+                st.model = provider.model if used == provider.name else None
+                st.version += 1
+                st.generated_at = utcnow()
+                await db.commit()
+
+        await asyncio.gather(*(run_and_save(spec, facts, h, st) for spec, facts, h, st in planned))
 
         regenerated = [spec.key.value for spec, *_ in planned]
         if await _run_chief(db, user, profile, states, provider, force or bool(planned)):
@@ -293,13 +323,56 @@ async def update_recommendation(db: AsyncSession, user: User, rec_id: int, statu
     return next((r for r in steps + done if r["id"] == row.id), _rec_view(row, 0))
 
 
+_LEVEL_RANK = {"HIGH": 0, "MEDIUM": 1, "LOW": 2}
+
+
+def _progress(states: dict[AgentKey, AgentState]) -> dict:
+    keys = [spec.key for spec in AGENTS] + [AgentKey.CHIEF]
+    done = sum(1 for k in keys if k in states and states[k].status == AgentStatus.READY and states[k].insight)
+    return {"completed": done, "total": len(keys)}
+
+
+def _phase(onboarded: bool, running: bool, ready: bool) -> str:
+    if running:
+        return "ANALYSING"
+    if ready:
+        return "READY"
+    return "WAITING_FOR_ONBOARDING" if not onboarded else "NOT_STARTED"
+
+
+def _preview_steps(states: dict[AgentKey, AgentState]) -> list[dict]:
+    """Suggestions from the specialists that have finished, before the Chief has built the plan.
+
+    Same action from several agents (shared keys) is shown once, with every agent listed.
+    """
+    merged: dict[str, dict] = {}
+    for spec in AGENTS:
+        st = states.get(spec.key)
+        if not st or st.status != AgentStatus.READY or not st.insight:
+            continue
+        for r in st.insight.get("recommendations") or []:
+            row = merged.get(r["key"])
+            if row is None:
+                merged[r["key"]] = {k: r.get(k) for k in ("key", "title", "why", "action_steps", "impact", "effort",
+                                                          "timeframe", "amount")} | {"agents": [spec.key.value]}
+            elif spec.key.value not in row["agents"]:
+                row["agents"].append(spec.key.value)
+    return sorted(merged.values(), key=lambda r: (_LEVEL_RANK.get(r["impact"], 3), -(r["amount"] or 0)))
+
+
 async def overview(db: AsyncSession, user: User) -> dict:
     states = await _states(db, user)
     chief = states.get(AgentKey.CHIEF)
     ins = (chief.insight if chief else None) or {}
     steps, done = await recommendations(db, user)
+    ready = bool(chief and chief.insight)
+    running = await _running_run(db, user) is not None
+    ob = await onboarding_service.get_or_create(db, user)
     return {
-        "ready": bool(chief and chief.insight),
+        "ready": ready,
+        "phase": _phase(ob.onboarding_completed, running, ready),
+        "progress": _progress(states),
+        "preview_steps": [] if ready else _preview_steps(states),
         "headline": ins.get("headline"), "summary": ins.get("summary"), "health": ins.get("health"),
         "currency": (chief.facts or {}).get("currency") if chief else None,
         "balance_sheet": (chief.facts or {}).get("balance_sheet") if chief else None,
@@ -327,8 +400,14 @@ async def status(db: AsyncSession, user: User) -> dict:
                 stale = True
                 break
     chief = states.get(AgentKey.CHIEF)
+    ready = bool(chief and chief.insight)
+    ob = await onboarding_service.get_or_create(db, user)
     return {
-        "ready": bool(chief and chief.insight), "running": running, "stale": stale, "last_run": last,
+        "ready": ready, "running": running, "stale": stale, "last_run": last,
+        "phase": _phase(ob.onboarding_completed, running, ready),
+        "onboarding_completed": ob.onboarding_completed,
+        "next_onboarding_step": ob.current_step.value,
+        "progress": _progress(states),
         "agents": [
             {"key": k.value, "status": (states[k].status if k in states else AgentStatus.PENDING).value,
              "version": states[k].version if k in states else 0}
